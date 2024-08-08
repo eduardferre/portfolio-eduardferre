@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Badge from '../components/Badge.astro'
+import LinkedInIcon from '../icons/LinkedInIcon.astro'
+import SocialBadge from '../components/SocialBadge.astro'
+import GitHubIcon from '../icons/GitHubIcon.astro'
+import GmailIcon from '../icons/GmailIcon.astro'
+import Experience from '../components/Experience.astro'
+import SectionContainer from '../components/SectionContainer.astro'
+import BriefcaseIcon from '../icons/BriefcaseIcon.astro'
+import CodeIcon from '../icons/CodeIcon.astro'
+import Projects from '../components/Projects.astro'
+---
+
+<Layout title="Eduard Ferré - Software Engineer">
+  <main class="px-4">
+    <SectionContainer id="about" class="py-36 pb-24">
+      <img
+        class="rounded-full size-12 mb-4"
+        src="/profileImage.png"
+        alt="Eduard Ferré avatar"
+      />
+      <div
+        class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-2 pb-4 lg:pb-10"
+      >
+        Hello, I'm<span class="text-purple-800">Eduard Ferré</span>
+        <a
+          href="https://linkedin.com/in/eduardferre"
+          class="flex justify-center items-center ml-2"
+        >
+          <Badge>Open to Work</Badge>
+        </a>
+      </div>
+      <h2 class="text-xl lg:text-2xl text-wrap max-w-[800px]">
+        +1 año de experiencia profesional. Ingeniero de Software. De Girona pero
+        actualmente viviendo en Madrid cursando el máster de Big Data Analytics
+        de la UC3M. Soy un entusiasmado en aprender análisi de datos y
+        solucionar problemas de la vida cuotidiana mediante la programación.
+      </h2>
+
+      <nav class="flex flex-wrap gap-x-4 gap-y-2 mt-4">
+        <SocialBadge href="https://linkedin.com/in/eduardferre">
+          <LinkedInIcon class="size-4 lg:size-6" />
+          LinkedIn
+        </SocialBadge>
+        <SocialBadge href="https://github.com/eduardferre">
+          <GitHubIcon class="size-4 lg:size-6" />
+          GitHub
+        </SocialBadge>
+        <SocialBadge href="mailto:eduardferresanchez@gmail.com">
+          <GmailIcon class="size-4 lg:size-6" />
+          eduardferresanchez@gmail.com
+        </SocialBadge>
+      </nav>
+    </SectionContainer>
+    <SectionContainer id="experience" class="pb-24">
+      <h2
+        class="text-2xl md:text-3xl font-semibold mb-6 flex flex-row gap-x-4 items-center"
+      >
+        <BriefcaseIcon class="size-6 md:size-7" /> Job Experience
+      </h2>
+      <Experience />
+    </SectionContainer>
+    <SectionContainer id="projects" class="pb-24">
+      <h2
+        class="text-2xl md:text-3xl font-semibold mb-6 flex flex-row gap-x-4 items-center"
+      >
+        <CodeIcon class="size-6 md:size-7" /> Projects
+      </h2>
+      <Projects />
+    </SectionContainer>
+  </main></Layout
+>

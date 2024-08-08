@@ -1,0 +1,59 @@
+---
+import SwiftIcon from '../icons/SwiftIcon.astro'
+import PythonIcon from '../icons/PythonIcon.astro'
+import SQLServerIcon from '../icons/SQLServerIcon.astro'
+import MongoDBIcon from '../icons/MongoDBIcon.astro'
+import SwiftUIIcon from '../icons/SwiftUIIcon.astro'
+import ProjectItem from './ProjectItem.astro'
+
+const TAGS = {
+  PYTHON: {
+    name: 'Python',
+    class: 'bg-gray-400 text-black',
+    icon: PythonIcon
+  },
+  SQL_SERVER: {
+    name: 'SQL Server',
+    class: 'bg-gray-600 text-white/80',
+    icon: SQLServerIcon
+  },
+  MongoDB: {
+    name: 'MongoDB',
+    class: 'bg-gray-500 text-white',
+    icon: MongoDBIcon
+  },
+  SWIFT: {
+    name: 'Swift',
+    class: 'bg-gray-400 text-black',
+    icon: SwiftIcon
+  },
+  SWIFT_UI: {
+    name: 'SwiftUI',
+    class: 'bg-gray-400 text-black',
+    icon: SwiftUIIcon
+  }
+}
+
+const PROJECTS = [
+  {
+    title: 'eGym - Fitness application with Machine Learning',
+    description: `eGym is an iOS application developed for my final Software Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.`,
+    link: 'https://upcommons.upc.edu/handle/2117/403591',
+    github: [
+      'https://github.com/eduardferre/eGym-app',
+      'https://github.com/eduardferre/eGym-server',
+      'https://github.com/eduardferre/eGym-ML_Testing'
+    ],
+    image: '/eGym/eGymImage.webp',
+    tags: [
+      TAGS.PYTHON,
+      TAGS.SQL_SERVER,
+      TAGS.MongoDB,
+      TAGS.SWIFT,
+      TAGS.SWIFT_UI
+    ]
+  }
+]
+---
+
+{PROJECTS.map((project) => <ProjectItem {...project} />)}
