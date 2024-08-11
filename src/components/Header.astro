@@ -1,11 +1,53 @@
 <header
-  class="flex justify-center items-center py-5 w-full xl:w-[1120px] mx-auto"
+  class="flex-no-wrap top-0 flex justify-center items-center py-5 w-full xl:w-[1120px] mx-auto"
 >
   <nav class="flex flex-row gap-x-14 opacity-80">
-    <a href="/">Home</a>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="/contact">Contact</a>
+    <a
+      href="#"
+      class="selected text-purple-800
+      hover:text-purple-800 transition duration-300"
+      >Home</a
+    >
+    <a href="#about" class="hover:text-purple-800
+    transition duration-300"
+      >About</a
+    >
+    <a
+      href="#experience"
+      class="active:text-purple-800
+    hover:text-purple-800
+    focus:text-purple-800 transition duration-300"
+      >Experience</a
+    >
+    <a
+      href="#projects"
+      class="active:text-purple-800
+    hover:text-purple-800
+    focus:text-purple-800 transition duration-300"
+      >Projects</a
+    >
+    <a
+      href="/contact"
+      class="active:text-purple-800
+    hover:text-purple-800
+    focus:text-purple-800 transition duration-300"
+      >Contact</a
+    >
   </nav>
 </header>
+
+<script>
+  const headerItems = document.querySelectorAll('a')
+
+  headerItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      const target = event.currentTarget as HTMLElement
+
+      headerItems.forEach((i) =>
+        i.classList.remove('selected', 'text-purple-800')
+      )
+
+      target.classList.add('selected', 'text-purple-800')
+    })
+  })
+</script>
