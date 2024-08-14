@@ -1,0 +1,30 @@
+---
+import Badge from '@/components/Badge.astro'
+import SectionContainer from '@/components/SectionContainer.astro'
+import SocialBadge from '@/components/SocialBadge.astro'
+import LinkedInIcon from '@/icons/LinkedInIcon.astro'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout
+  title="Design System eduardferre.dev"
+  description="Components cataloge of Eduard Ferré's portfolio"
+>
+  <SectionContainer class="py-44 pb-32 flex flex-col gap-y-10">
+    <article>
+      <h1 class="mb-8">&lt;Badge /&gt;</h1>
+
+      <Badge>I'm Open to Work </Badge>
+    </article>
+    <article>
+      <h1 class="mb-8">&lt;SocialBadge /&gt;</h1>
+
+      <div class="flex">
+        <SocialBadge href="https://linkedin.com/in/eduardferre">
+          <LinkedInIcon class="size-4 lg:size-6" />
+          LinkedIn
+        </SocialBadge>
+      </div>
+    </article>
+  </SectionContainer>
+</Layout>
