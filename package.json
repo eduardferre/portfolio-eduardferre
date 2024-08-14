@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "portfolio-eduardferre",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -14,8 +14,8 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/onest": "^5.0.4",
     "@fontsource/onest": "^5.0.4",
-    "astro": "^4.13.1",
-    "tailwindcss": "^3.4.7",
+    "astro": "^4.13.4",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
   }
 }
