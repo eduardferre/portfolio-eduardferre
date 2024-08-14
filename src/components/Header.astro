@@ -3,22 +3,22 @@ const navItems = [
   {
     title: 'Experience',
     label: 'experience',
-    url: '#experience'
+    url: '/#experience'
   },
   {
     title: 'Projects',
     label: 'projects',
-    url: '#projects'
+    url: '/#projects'
   },
   {
     title: 'About Me',
     label: 'about-me',
-    url: '#about-me'
+    url: '/#about-me'
   },
   {
     title: 'Contact',
     label: 'contact',
-    url: '#contact'
+    url: '/#contact'
   }
 ]
 ---
@@ -27,12 +27,12 @@ const navItems = [
   class="fixed top-0 z-10 flex justify-center items-center w-full mx-auto mt-2"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-100 justify-center items-center"
+    class="flex px-3 font-medium rounded-full text-xs text-gray-100 justify-center items-center sm:text-sm"
   >
     {
       navItems.map((link) => (
         <a
-          class="relative block px-2 py-2 transition hover:text-purple-600"
+          class="relative block px-4 py-2 transition hover:text-purple-600 md:px-6"
           aria-label={link.label}
           href={link.url}
         >
