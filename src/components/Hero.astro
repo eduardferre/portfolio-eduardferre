@@ -1,0 +1,53 @@
+---
+import GitHubIcon from '@/icons/GitHubIcon.astro'
+import GmailIcon from '@/icons/GmailIcon.astro'
+import LinkedInIcon from '@/icons/LinkedInIcon.astro'
+import Badge from './Badge.astro'
+import SocialBadge from './SocialBadge.astro'
+---
+
+<div class="max-w-2xl">
+  <div class="flex gap-4 mb-4">
+    <img
+      class="rounded-full shadow-lg size-16"
+      src="/profileImage.webp"
+      alt="Eduard Ferré avatar"
+    />
+    <a
+      href="https://linkedin.com/in/eduardferre"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center md:justify-center md:hover:scale-105 transition"
+    >
+      <Badge>I'm Open to Work</Badge>
+    </a>
+  </div>
+  <h1
+    class="text-gray-800 dark:text-white tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-2"
+  >
+    Hello, I'm<span class="text-purple-600">Eduard Ferré</span>
+  </h1>
+  <p
+    class="mt-6 text-xl text-gray-800 dark:text-gray-300 [&>strong]:text-purple-600 [&>strong]:font-semibold"
+  >
+    +1 año de experiencia profesional. <strong>Ingeniero de Software</strong> de
+    Girona, España 🇪🇸. Actualmente estoy viviendo en Madrid cursando el máster de
+    <strong>Big Data Analytics en la UC3M</strong>, especializandome en análisi
+    y modelaje de datos.
+  </p>
+
+  <nav class="flex flex-wrap gap-4 mt-8">
+    <SocialBadge href="https://linkedin.com/in/eduardferre">
+      <LinkedInIcon class="size-4 lg:size-6" />
+      LinkedIn
+    </SocialBadge>
+    <SocialBadge href="https://github.com/eduardferre">
+      <GitHubIcon class="size-4 lg:size-6" />
+      GitHub
+    </SocialBadge>
+    <SocialBadge href="mailto:eduardferresanchez@gmail.com">
+      <GmailIcon class="size-4 lg:size-6" />
+      eduardferresanchez@gmail.com
+    </SocialBadge>
+  </nav>
+</div>

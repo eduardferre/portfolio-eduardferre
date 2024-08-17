@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro'
+
 const navItems = [
   {
     title: 'Experience',
@@ -27,12 +29,12 @@ const navItems = [
   class="fixed top-0 z-10 flex justify-center items-center w-full mx-auto mt-2"
 >
   <nav
-    class="flex px-3 font-medium rounded-full text-xs text-gray-100 justify-center items-center sm:text-sm"
+    class="flex px-3 font-medium rounded-full text-xs text-gray-600 dark:text-gray-100 justify-center items-center sm:text-sm"
   >
     {
       navItems.map((link) => (
         <a
-          class="relative block px-4 py-2 transition hover:text-purple-600 md:px-6"
+          class="relative block px-4 py-2 transition hover:text-purple-900 dark:hover:text-purple-600 md:px-6"
           aria-label={link.label}
           href={link.url}
         >
@@ -40,6 +42,7 @@ const navItems = [
         </a>
       ))
     }
+    <ThemeToggle />
   </nav>
 </header>
 
@@ -92,9 +95,16 @@ const navItems = [
     animation-range: 0 100px;
   }
 
+  nav {
+    @apply dark:bg-gray-800/50 bg-white/50;
+  }
+
   @keyframes nav-shadown {
+    from {
+      @apply dark:bg-gray-800/0 bg-white/0;
+    }
     to {
-      @apply shadow-lg ring-1 backdrop-blur bg-gray-800/60 ring-white/10;
+      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
     }
   }
 </style>

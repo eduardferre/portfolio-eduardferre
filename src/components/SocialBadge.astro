@@ -1,10 +1,16 @@
-<a class="flex items-center group" {...Astro.props}>
+<a
+  class="flex items-center group"
+  {...Astro.props}
+  target="_blank"
+  rel="noopener noreferrer"
+  role="link"
+>
   <span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
     <span
       class="absolute inset-[-1000%] bg-white/20 group-hover:animate-[spin_2s_linear_infinite] group-hover:bg-[conic-gradient(from_90deg_at_50%_50%,#993299_0%,#3e2155_50%,#993299_100%)]"
     ></span>
     <div
-      class="inline-flex gap-x-2 items-center justify-center w-full px-3 py-1 md:py-2 md:px-4 text-sm lg:text-base rounded-full cursor-pointer bg-gray-800 text-white/80 backdrop-blur-3xl whitespace-nowrap"
+      class="inline-flex gap-x-2 items-center justify-center w-full px-3 py-1 md:py-2 md:px-4 text-sm lg:text-base rounded-full cursor-pointer bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap hover:bg-gray-600 hover:text-white/80 dark:hover:bg-gray-200/80 dark:hover:text-gray-800 transition"
     >
       <slot />
     </div>

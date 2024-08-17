@@ -9,7 +9,7 @@ const EXPERIENCE = [
     company: 'Giesecke+Devrient',
     description:
       'Desarrollador Full Stack involucrado en el desarrollo de múltiples soluciones backend con Java y JavaScript/TypeScript, y del diseño de una página web con Angular.',
-    link: 'https://www.gi-de.com/en/',
+    link: 'https://www.gi-de.com/',
     technologies: [
       'Java',
       'SQL',
@@ -32,16 +32,16 @@ const EXPERIENCE = [
     company: 'Universitat Politécnica de Catalunya',
     description:
       'Investigación sobre la captación de energía lumínica en interiores. Encargado de realizar múltiples estudios de celdas fotovoltaicas bajo varios tipos de luz a diferentes niveles de intensidad lumínica.',
-    link: 'https://www.mdpi.com/2504-3900/97/1/149',
+    link: 'https://doi.org/10.3390/proceedings2024097149',
     technologies: ['Matlab', 'KiCad', 'BenchVue', 'AvaSoft']
   }
 ]
 ---
 
-<ol class="relative border-s border-gray-200 dark:border-gray-700 ml-3">
+<ol class="relative mt-16">
   {
     EXPERIENCE.map((experience) => (
-      <li class="mb-10 ms-4">
+      <li>
         <ExperienceItem {...experience} />
       </li>
     ))

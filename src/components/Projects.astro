@@ -1,9 +1,9 @@
 ---
-import SwiftIcon from '../icons/SwiftIcon.astro'
-import PythonIcon from '../icons/PythonIcon.astro'
-import SQLServerIcon from '../icons/SQLServerIcon.astro'
-import MongoDBIcon from '../icons/MongoDBIcon.astro'
-import SwiftUIIcon from '../icons/SwiftUIIcon.astro'
+import SwiftIcon from '@/icons/SwiftIcon.astro'
+import PythonIcon from '@/icons/PythonIcon.astro'
+import SQLServerIcon from '@/icons/SQLServerIcon.astro'
+import MongoDBIcon from '@/icons/MongoDBIcon.astro'
+import SwiftUIIcon from '@/icons/SwiftUIIcon.astro'
 import ProjectItem from './ProjectItem.astro'
 
 const TAGS = {
@@ -13,7 +13,7 @@ const TAGS = {
     icon: PythonIcon
   },
   SQL_SERVER: {
-    name: 'SQL Server',
+    name: 'MS SQL',
     class: 'bg-gray-600 text-white/80',
     icon: SQLServerIcon
   },
@@ -38,22 +38,30 @@ const PROJECTS = [
   {
     title: 'eGym - Fitness application with Machine Learning',
     description: `eGym is an iOS application developed for my final Software Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.`,
-    link: 'https://upcommons.upc.edu/handle/2117/403591',
+    link: {
+      name: 'Thesis',
+      href: 'https://upcommons.upc.edu/handle/2117/403591'
+    },
     github: [
-      'https://github.com/eduardferre/eGym-app',
-      'https://github.com/eduardferre/eGym-server',
-      'https://github.com/eduardferre/eGym-ML_Testing'
+      {
+        name: 'App',
+        href: 'https://github.com/eduardferre/eGym-app'
+      },
+      {
+        name: 'Server',
+        href: 'https://github.com/eduardferre/eGym-server'
+      },
+      {
+        name: 'ML',
+        href: 'https://github.com/eduardferre/eGym-ML_Testing'
+      }
     ],
     image: '/eGym/eGymImage.webp',
-    tags: [
-      TAGS.PYTHON,
-      TAGS.SQL_SERVER,
-      TAGS.MongoDB,
-      TAGS.SWIFT,
-      TAGS.SWIFT_UI
-    ]
+    tags: [TAGS.PYTHON, TAGS.SQL_SERVER, TAGS.MongoDB, TAGS.SWIFT]
   }
 ]
 ---
 
-{PROJECTS.map((project) => <ProjectItem {...project} />)}
+<section class="flex flex-col gap-y-16">
+  {PROJECTS.map((project) => <ProjectItem {...project} />)}
+</section>
