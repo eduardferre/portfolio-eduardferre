@@ -4,7 +4,7 @@
 
 [![Portfolio Preview](https://github.com/user-attachments/assets/77c9a0a7-1ab3-498a-b484-3ef5dafe395a)](https://eduardferre.dev)
 
-[![Live Site](https://img.shields.io/badge/Live_Site-eduardferre.dev-FF5D01?style=flat&logo=astro&logoColor=white)](https://eduardferre.dev)
+[![Live Site](https://img.shields.io/badge/Live_Site-portfolio.eduardferre.dev-FF5D01?style=flat&logo=astro&logoColor=white)](https://portfolio.eduardferre.dev)
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-06B6D4?style=flat&logo=tailwind-css&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
@@ -163,3 +163,4 @@ This project is open source and available for inspiration. If you use significan
 Made with ❤️ by [Eduard Ferré](https://eduardferre.dev) · Deployed on [Vercel](https://vercel.com)
 
 </div>
+
