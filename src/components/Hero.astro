@@ -4,6 +4,15 @@ import GmailIcon from '@/icons/GmailIcon.astro'
 import LinkedInIcon from '@/icons/LinkedInIcon.astro'
 import Badge from './Badge.astro'
 import SocialBadge from './SocialBadge.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
 ---
 
 <div class="max-w-2xl">
@@ -12,6 +21,11 @@ import SocialBadge from './SocialBadge.astro'
       class="rounded-full shadow-lg size-16"
       src="/profileImage.webp"
       alt="Eduard Ferré avatar"
+      width="64"
+      height="64"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
     />
     <a
       href="https://linkedin.com/in/eduardferre"
@@ -19,24 +33,18 @@ import SocialBadge from './SocialBadge.astro'
       rel="noopener noreferrer"
       class="flex items-center md:justify-center md:hover:scale-105 transition"
     >
-      <Badge>I'm Open to Offers</Badge>
+      <Badge>{t('hero.badge')}</Badge>
     </a>
   </div>
   <h1
     class="text-gray-800 dark:text-white tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-2"
   >
-    Hello, I'm<span class="text-purple-600">Eduard Ferré</span>
+    {t('hero.greeting')}<span class="text-purple-600">Eduard Ferré</span>
   </h1>
   <p
-    class="mt-6 text-xl text-gray-800 dark:text-gray-300 [&>strong]:text-purple-600 [&>strong]:font-semibold"
-  >
-    +2 years of professional experience. <strong>Software Engineer</strong> and <strong>Data Scientist</strong> from Girona,
-    Spain 🇪🇸. I am currently living in Barcelona, pursuing an online master's degree in
-    <strong>Project Management</strong> at <strong>EAE Business School</strong>, specialising in Agile Methodologies 
-    and Digital Transformation. Passionate about building scalable software solutions and extracting insights from data to drive 
-    strategic decisions. I have a strong foundation in Java, JS/TS, Angular, Python, Machine Learning, and cross-functional collaboration. 
-    Always eager to learn, improve, and contribute to impactful projects in tech and innovation.
-  </p>
+    class="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-200 [&>strong]:text-purple-600 dark:[&>strong]:text-purple-400 [&>strong]:font-semibold"
+    set:html={t('hero.bio')}
+  />
 
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialBadge href="https://linkedin.com/in/eduardferre">

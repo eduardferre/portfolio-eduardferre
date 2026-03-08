@@ -1,28 +1,41 @@
 ---
 import ThemeToggle from './ThemeToggle.astro'
+import type { Lang } from '@/i18n/ui'
+import { languages } from '@/i18n/ui'
+import { useTranslations, getLocalizedPathname } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
 
 const navItems = [
   {
-    title: 'Experience',
+    title: t('nav.experience'),
     label: 'experience',
-    url: '/#experience'
+    url: lang === 'en' ? '/#experience' : '/es/#experience'
   },
   {
-    title: 'Projects',
+    title: t('nav.projects'),
     label: 'projects',
-    url: '/#projects'
+    url: lang === 'en' ? '/#projects' : '/es/#projects'
   },
   {
-    title: 'About Me',
+    title: t('nav.aboutMe'),
     label: 'about-me',
-    url: '/#about-me'
+    url: lang === 'en' ? '/#about-me' : '/es/#about-me'
   },
   {
-    title: 'Contact',
+    title: t('nav.contact'),
     label: 'contact',
     url: 'mailto:eduardferresanchez@gmail.com'
   }
 ]
+
+const switchLang: Lang = lang === 'en' ? 'es' : 'en'
+const switchUrl = getLocalizedPathname(Astro.url.pathname, switchLang)
 ---
 
 <header
@@ -42,7 +55,14 @@ const navItems = [
         </a>
       ))
     }
-    <ThemeToggle />
+    <a
+      href={switchUrl}
+      class="relative block px-2 py-2 transition hover:text-purple-900 dark:hover:text-purple-600 sm:px-3 text-xs sm:text-sm font-semibold"
+      aria-label={`Switch to ${languages[switchLang]}`}
+    >
+      {switchLang.toUpperCase()}
+    </a>
+    <ThemeToggle lang={lang} />
   </nav>
 </header>
 
@@ -89,22 +109,25 @@ const navItems = [
 </script>
 
 <style>
+  @reference "../styles/global.css";
+
   nav {
     animation: nav-shadown 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
-  }
-
-  nav {
     @apply dark:bg-gray-800/50 bg-white/50;
   }
 
   @keyframes nav-shadown {
     from {
-      @apply dark:bg-gray-800/0 bg-white/0;
+      background-color: transparent;
     }
     to {
-      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1),
+        0 0 0 1px rgb(255 255 255 / 0.1);
+      backdrop-filter: blur(8px);
     }
   }
 </style>

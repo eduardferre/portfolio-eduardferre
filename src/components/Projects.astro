@@ -5,6 +5,15 @@ import SQLServerIcon from '@/icons/SQLServerIcon.astro'
 import MongoDBIcon from '@/icons/MongoDBIcon.astro'
 import SwiftUIIcon from '@/icons/SwiftUIIcon.astro'
 import ProjectItem from './ProjectItem.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
 
 const TAGS = {
   PYTHON: {
@@ -36,8 +45,8 @@ const TAGS = {
 
 const PROJECTS = [
   {
-    title: 'eGym - Fitness application with Machine Learning',
-    description: `eGym is an iOS application developed for my final Software Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.`,
+    title: t('project.0.title'),
+    description: t('project.0.description'),
     link: {
       name: 'Thesis',
       href: 'https://upcommons.upc.edu/handle/2117/403591'

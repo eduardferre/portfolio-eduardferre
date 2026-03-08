@@ -1,5 +1,7 @@
 ---
 import LinkInLine from './LinkInLine.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
 
 interface Props {
   startDate: string
@@ -9,10 +11,21 @@ interface Props {
   company: string
   link?: string
   technologies?: string[]
+  lang?: Lang
 }
 
-const { startDate, endDate, title, company, description, link, technologies } =
-  Astro.props
+const {
+  startDate,
+  endDate,
+  title,
+  company,
+  description,
+  link,
+  technologies,
+  lang = 'en'
+} = Astro.props
+
+const t = useTranslations(lang)
 ---
 
 <div
@@ -40,7 +53,7 @@ const { startDate, endDate, title, company, description, link, technologies } =
     {
       link && (
         <LinkInLine href={link}>
-          See more{' '}
+          {t('experience.seeMore')}{' '}
           <svg
             class="w-5 icon icon-tabler icon-tabler-chevron-right"
             width="24"

@@ -2,16 +2,29 @@
 import SunIcon from '@/icons/SunIcon.astro'
 import MoonIcon from '@/icons/MoonIcon.astro'
 import SystemIcon from '@/icons/SystemIcon.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
 
-const THEMES = ['Light', 'Dark', 'System']
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
+
+const THEMES = [
+  { key: 'light', label: t('theme.light') },
+  { key: 'dark', label: t('theme.dark') },
+  { key: 'system', label: t('theme.system') }
+]
 ---
 
 <div class="relative ml-1 mr-1">
   <button
     id="theme-toggle-btn"
-    class="appearance-none border-none flex hover:scale-125 transition"
+    class="appearance-none border-none flex hover:scale-125 transition cursor-pointer"
   >
-    <span class="sr-only">Elige el tema</span>
+    <span class="sr-only">{t('theme.srOnly')}</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
     <MoonIcon
       id="dark"
@@ -24,13 +37,16 @@ const THEMES = ['Light', 'Dark', 'System']
   </button>
   <div
     id="themes-menu"
-    class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
+    class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-32 rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
   >
     <ul>
       {
         THEMES.map((theme) => (
-          <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm">
-            {theme}
+          <li
+            class="themes-menu-option px-2 py-1.5 cursor-pointer hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm"
+            data-theme={theme.key}
+          >
+            {theme.label}
           </li>
         ))
       }
@@ -57,36 +73,24 @@ const THEMES = ['Light', 'Dark', 'System']
   }
 </style>
 
-<script is:inline>
-  let remove = null
+<script>
   const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
-  const themesMenu = document.getElementById('themes-menu')
 
-  const getThemePreference = () => {
+  const getThemePreference = (): string => {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('theme') ?? 'system'
     }
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
+    return matchMedia.matches ? 'dark' : 'light'
   }
 
-  const updateIcon = (themePreference) => {
+  const updateIcon = (themePreference: string) => {
     document.querySelectorAll('.theme-toggle-icon').forEach((element) => {
-      element.style.scale = element.id === themePreference ? '1' : '0'
+      ;(element as HTMLElement).style.scale =
+        element.id === themePreference ? '1' : '0'
     })
   }
 
   const updateTheme = () => {
-    if (remove != null) {
-      remove()
-    }
-    matchMedia.addEventListener('change', updateTheme)
-    remove = () => {
-      matchMedia.removeEventListener('change', updateTheme)
-    }
-
     const themePreference = getThemePreference()
     const isDark =
       themePreference === 'dark' ||
@@ -96,20 +100,37 @@ const THEMES = ['Light', 'Dark', 'System']
     document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
   }
 
-  updateTheme()
+  // Apply theme immediately on every page load (including after navigation)
+  document.addEventListener('astro:page-load', () => {
+    updateTheme()
 
-  document.addEventListener('click', () => themesMenu.classList.remove('open'))
+    const themesMenu = document.getElementById('themes-menu')
+    if (!themesMenu) return
 
-  document.getElementById('theme-toggle-btn').addEventListener('click', (e) => {
-    e.stopPropagation()
-    const isClosed = !themesMenu.classList.contains('open')
-    themesMenu.classList[isClosed ? 'add' : 'remove']('open')
-  })
+    document.addEventListener(
+      'click',
+      () => themesMenu.classList.remove('open'),
+      { once: false }
+    )
 
-  document.querySelectorAll('.themes-menu-option').forEach((element) => {
-    element.addEventListener('click', (e) => {
-      localStorage.setItem('theme', e.target.innerText.toLowerCase().trim())
-      updateTheme()
+    document
+      .getElementById('theme-toggle-btn')
+      ?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        const isClosed = !themesMenu.classList.contains('open')
+        themesMenu.classList[isClosed ? 'add' : 'remove']('open')
+      })
+
+    document.querySelectorAll('.themes-menu-option').forEach((element) => {
+      element.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+        localStorage.setItem('theme', target.dataset.theme ?? 'system')
+        updateTheme()
+        themesMenu.classList.remove('open')
+      })
     })
   })
+
+  // Also react to system dark/light changes
+  matchMedia.addEventListener('change', updateTheme)
 </script>

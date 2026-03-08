@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Portfolio Preview](https://github.com/user-attachments/assets/77c9a0a7-1ab3-498a-b484-3ef5dafe395a)](https://eduardferre.dev)
+[![Portfolio Preview](https://github.com/user-attachments/assets/77c9a0a7-1ab3-498a-b484-3ef5dafe395a)](https://portfolio.eduardferre.dev)
 
 [![Live Site](https://img.shields.io/badge/Live_Site-portfolio.eduardferre.dev-FF5D01?style=flat&logo=astro&logoColor=white)](https://portfolio.eduardferre.dev)
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)

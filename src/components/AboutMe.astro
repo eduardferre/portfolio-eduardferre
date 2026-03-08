@@ -1,38 +1,27 @@
-<arcticle
+---
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
+---
+
+<article
   class="flex flex-col justify-center items-center gap-8 md:flex-row
               text-gray-700 dark:text-gray-300"
 >
   <div
     class="[&>p]:mb-4 [&>p>strong]:text-purple-900 dark:[&>p>strong]:text-purple-600 [&>p>strong]:font-normal [&>p>strong]:font-mono order-2 md:order-1"
   >
-    <p>
-      I'm Eduard, although everyone knows me as Edu! At 15 years old, I learned
-      programming logic and was able to create a Brick Breaker with Visual
-      Basic. Years later, I pursued a <strong
-        >double degree in Aerospace Engineering and Software Engineering</strong>
-      at <strong>Universitat Politècnica de Catalunya (UPC)</strong>.
-    </p>
-
-    <p>
-      Although I developed multiple projects with different technologies during
-      my degree, it wasn't until my final year that I decided to develop
-      software and <strong>work at G+D</strong>.
-    </p>
-
-    <p>
-      There, I learned to <strong
-        >work in an <em class="italic">Agile team</em> and adapt to new technologies</strong>.
-      During my evolution as a <strong
-        ><em class="italic">Software Engineer</em></strong
-      >, I created a gym application as my final degree project, which turned
-      out to be a great success.
-    </p>
-
-    <p>
-      Later, I pursued a master's degree in <strong>Big Data Analytics</strong> at
-      <strong>Universidad Carlos III de Madrid (UC3M)</strong>, where I deepened my
-      knowledge in data science, machine learning, and large-scale data processing.
-    </p>
+    <p set:html={t('about.p1')} />
+    <p set:html={t('about.p2')} />
+    <p set:html={t('about.p3')} />
+    <p set:html={t('about.p4')} />
+    <p set:html={t('about.p5')} />
   </div>
   <img
     loading="lazy"
@@ -41,4 +30,4 @@
     class="order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-purple-800/30 dark:bg-purple-200 ring-1 ring-purple-800/60 dark:ring-white/20"
     style="object-position: 50% 50%;"
   />
-</arcticle>
+</article>

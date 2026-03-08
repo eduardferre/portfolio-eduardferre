@@ -1,14 +1,43 @@
 ---
 import ExperienceItem from './ExperienceItem.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
 
 const today = new Date()
-const month = today.toLocaleString('en-US', { month: 'long' })
+const month = today.toLocaleString(lang === 'es' ? 'es-ES' : 'en-US', {
+  month: 'long'
+})
 const year = today.getFullYear()
 
 const EXPERIENCE = [
   {
-    startDate: 'August 2023',
+    startDate: 'March 2025',
     endDate: `${month} ${year}`,
+    title: 'Data Engineer',
+    company: 'Carver Advanced Systems',
+    description:
+      'Leading multiple projects involving Large Language Models (LLMs), Knowledge Graphs with Retrieval-Augmented Generation (RAG), and Mainframe Analysis using AI techniques.',
+    link: 'https://carver-as.com',
+    technologies: [
+      'Python',
+      'LLMs',
+      'Knowledge Graphs',
+      'RAG',
+      'AI',
+      'Mainframe',
+      'Data Engineering'
+    ]
+  },
+  {
+    startDate: 'August 2023',
+    endDate: 'March 2025',
     title: 'Software Engineer',
     company: 'Giesecke+Devrient',
     description:
@@ -46,7 +75,7 @@ const EXPERIENCE = [
   {
     EXPERIENCE.map((experience) => (
       <li>
-        <ExperienceItem {...experience} />
+        <ExperienceItem {...experience} lang={lang} />
       </li>
     ))
   }
