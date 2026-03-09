@@ -41,11 +41,13 @@ const { title, description, link, github, image, tags } = Astro.props
         src={image}
         alt={`Screenshot from project: ${title}`}
         loading="lazy"
-        class="object-cover object-top w-full sm:h-full md:scale-110
+        transition:name={`project-${title.replace(/[^a-zA-Z]/g, '')}`}
+        transition:persist={`project-persist-${title.replace(/[^a-zA-Z]/g, '')}`}
+        class="object-cover object-top w-full aspect-video md:scale-110
              transition duration-500 md:group-hover:scale-105"
       />
     </a>
-    <footer class="flex flex-wrap items-end justify-start gap-x-4 gap-y-4 mt-4">
+    <footer class="flex flex-wrap items-end justify-start gap-x-2 gap-y-2 mt-4">
       {
         github &&
           github.map((repo) => (
@@ -68,21 +70,23 @@ const { title, description, link, github, image, tags } = Astro.props
 
   <div class="w-full md:w-1/2 md:max-w-lg">
     <h3 class="text-2xl font-bold text-purple-600 mb-2">{title}</h3>
-    <div class="flex flex-wrap mt-2">
-      <!-- <ul class="flex flex-row gap-x-2 mb-2">
-        {
-          tags.map((tag) => (
-            <li>
-              <span
-                class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
-              >
-                <tag.icon class="size-4" />
-                {tag.name}
-              </span>
-            </li>
-          ))
-        }
-      </ul> -->
+    <div class="flex flex-wrap mt-2 w-full">
+      <div class="relative flex overflow-hidden w-full group/carousel mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <ul class="flex flex-row gap-x-2 animate-carousel whitespace-nowrap min-w-max group-hover/carousel:[animation-play-state:paused] py-1">
+          {
+            [...tags, ...tags, ...tags].map((tag) => (
+              <li>
+                <span
+                  class={`flex items-center gap-x-2 rounded-full text-xs md:text-sm font-medium transition duration-300 hover:scale-105 ${tag.class} py-1 px-3 shadow-sm`}
+                >
+                  <tag.icon class="size-4" />
+                  {tag.name}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
       <div class="mt-2 text-pretty text-gray-700 dark:text-gray-400">
         {description}
@@ -90,3 +94,19 @@ const { title, description, link, github, image, tags } = Astro.props
     </div>
   </div>
 </article>
+
+<style>
+  @keyframes carousel {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* We loop exactly one third of the total width since array is duplicated 3 times */
+      transform: translateX(calc(-33.333333%));
+    }
+  }
+
+  .animate-carousel {
+    animation: carousel 25s linear infinite;
+  }
+</style>

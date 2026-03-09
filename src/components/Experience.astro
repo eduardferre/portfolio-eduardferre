@@ -18,12 +18,11 @@ const year = today.getFullYear()
 
 const EXPERIENCE = [
   {
-    startDate: 'March 2025',
-    endDate: `${month} ${year}`,
-    title: 'Data Engineer',
+    startDate: `${t('date.august')} 2025`,
+    endDate: `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`,
+    title: t('experience.0.title'),
     company: 'Carver Advanced Systems',
-    description:
-      'Leading multiple projects involving Large Language Models (LLMs), Knowledge Graphs with Retrieval-Augmented Generation (RAG), and Mainframe Analysis using AI techniques.',
+    description: t('experience.0.description'),
     link: 'https://carver-as.com',
     technologies: [
       'Python',
@@ -36,12 +35,11 @@ const EXPERIENCE = [
     ]
   },
   {
-    startDate: 'August 2023',
-    endDate: 'March 2025',
-    title: 'Software Engineer',
+    startDate: `${t('date.august')} 2023`,
+    endDate: `${t('date.august')} 2025`,
+    title: t('experience.1.title'),
     company: 'Giesecke+Devrient',
-    description:
-      'Full Stack development of multiple backend solutions with Java and JavaScript/TypeScript using Oracle SQL and MongoDB, and also involved in the design of a website using Angular.',
+    description: t('experience.1.description'),
     link: 'https://www.gi-de.com/',
     technologies: [
       'Java',
@@ -59,12 +57,11 @@ const EXPERIENCE = [
     ]
   },
   {
-    startDate: 'February 2023',
-    endDate: 'July 2023',
-    title: 'Researcher',
+    startDate: `${t('date.february')} 2023`,
+    endDate: `${t('date.july')} 2023`,
+    title: t('experience.2.title'),
     company: 'Universitat Politécnica de Catalunya',
-    description:
-      'Research on indoor light energy harvesting. Responsible for conducting multiple studies on photovoltaic cells under various types of light at different levels of light intensity.',
+    description: t('experience.2.description'),
     link: 'https://doi.org/10.3390/proceedings2024097149',
     technologies: ['Matlab', 'KiCad', 'BenchVue', 'AvaSoft']
   }

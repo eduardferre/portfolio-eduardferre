@@ -46,6 +46,9 @@ export const ui = {
         'project.0.title': 'eGym - Fitness application with Machine Learning',
         'project.0.description':
             "eGym is an iOS application developed for my final Software Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.",
+        'project.1.title': 'ZenithFi - Personal Finance App',
+        'project.1.description':
+            'ZenithFi is a modern, elegant personal finance and budgeting web application built for clarity and ease of use. Track income and expenses, manage spending categories with unique colors and emojis, and set budget limits. Features a customizable dashboard, deep analytics with charts, internationalization (English, Spanish, Catalan), dark mode, and secure session-based authentication.',
 
         // About Me
         'about.p1':
@@ -116,6 +119,9 @@ export const ui = {
         'project.0.title': 'eGym - Aplicación de fitness con Machine Learning',
         'project.0.description':
             'eGym es una aplicación iOS desarrollada para mi trabajo de fin de grado en Ingeniería de Software. La aplicación combina una red social, una app de seguimiento fitness y un entrenador personal potenciado con machine learning. Todos los datos se almacenan en dos bases de datos (control de acceso y almacenamiento) mediante una API Rest. El machine learning se basa en un modelo personalizado, entrenado con múltiples vídeos de diferentes ejercicios.',
+        'project.1.title': 'ZenithFi - Aplicación de Finanzas Personales',
+        'project.1.description':
+            'ZenithFi es una aplicación web moderna y elegante de finanzas personales diseñada para ofrecer claridad y facilidad de uso. Permite registrar ingresos y gastos, gestionar categorías personalizadas con colores y emojis, y establecer límites de presupuesto. Cuenta con un panel personalizable, analíticas avanzadas con gráficos interactivos, modo oscuro, internacionalización (Inglés, Español, Catalán) y autenticación segura basada en sesiones.',
 
         // About Me
         'about.p1':
