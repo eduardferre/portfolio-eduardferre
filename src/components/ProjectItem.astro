@@ -47,7 +47,8 @@ const { title, description, link, github, image, tags } = Astro.props
              transition duration-500 md:group-hover:scale-105"
       />
     </a>
-    <footer class="flex flex-wrap items-end justify-start gap-x-2 gap-y-2 mt-4">
+    <h3 class="md:hidden text-2xl font-bold text-purple-600 mt-4 mb-2">{title}</h3>
+    <footer class="flex flex-wrap items-end justify-start gap-x-2 gap-y-2 mt-2 md:mt-4">
       {
         github &&
           github.map((repo) => (
@@ -69,7 +70,7 @@ const { title, description, link, github, image, tags } = Astro.props
   </div>
 
   <div class="w-full md:w-1/2 md:max-w-lg">
-    <h3 class="text-2xl font-bold text-purple-600 mb-2">{title}</h3>
+    <h3 class="hidden md:block text-2xl font-bold text-purple-600 mb-2">{title}</h3>
     <div class="flex flex-wrap mt-2 w-full">
       <div class="relative flex overflow-hidden w-full group/carousel mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <ul class="flex flex-row gap-x-2 animate-carousel whitespace-nowrap min-w-max group-hover/carousel:[animation-play-state:paused] py-1">
