@@ -10,9 +10,9 @@ export type Lang = keyof typeof languages
 export const ui = {
     en: {
         // Meta
-        'meta.title': "Eduard Ferré's Portfolio - Software Engineer",
+        'meta.title': 'Eduard Ferré — AI / Data Engineer & Software Engineer',
         'meta.description':
-            'Hire Eduard Ferré to develop full stack applications. Software Engineer and Data Analytics student. Experience with Java, JavaScript/TypeScript, Python and database management (SQL and noSQL).',
+            'Portfolio of Eduard Ferré, AI / Data Engineer at Carver Advanced Systems. Building solutions with LLMs, RAG, Knowledge Graphs and Mainframe code analysis (COBOL/JCL). Experienced in Python, data engineering and full-stack software development.',
 
         // Nav
         'nav.experience': 'Experience',
@@ -24,7 +24,7 @@ export const ui = {
         'hero.badge': "I'm Open to Offers",
         'hero.greeting': "Hello, I'm",
         'hero.bio':
-            "+3 years of professional experience. <strong>Data Engineer</strong> at <strong>Carver Advanced Systems</strong> from Girona, Spain 🇪🇸. Currently working on projects involving <strong>LLMs</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong>Mainframe Analysis using AI</strong>. Living in Barcelona, pursuing an online master's degree in <strong>Project Management</strong> at <strong>EAE Business School</strong>, specialising in Agile Methodologies and Digital Transformation. Passionate about building scalable data solutions and leveraging AI to drive strategic decisions.",
+            "+3 years of professional experience. <strong>AI / Data Engineer</strong> at <strong>Carver Advanced Systems</strong> from Girona, Spain 🇪🇸. Currently working on projects involving <strong>LLMs</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong>Mainframe code analysis (COBOL/JCL) using AI</strong>. Living in Barcelona, pursuing an online master's degree in <strong>Project Management</strong> at <strong>EAE Business School</strong>, specialising in Agile Methodologies and Digital Transformation. Passionate about building scalable data solutions and leveraging AI to drive strategic decisions.",
 
         // Section titles
         'section.experience': 'Job Experience',
@@ -32,9 +32,9 @@ export const ui = {
         'section.aboutMe': 'About Me',
 
         // Experience
-        'experience.0.title': 'Data Engineer',
+        'experience.0.title': 'AI / Data Engineer',
         'experience.0.description':
-            'Leading multiple projects involving Large Language Models (LLMs), Knowledge Graphs with Retrieval-Augmented Generation (RAG), and Mainframe Analysis using AI techniques.',
+            'Leading multiple projects involving Large Language Models (LLMs), Knowledge Graphs with Retrieval-Augmented Generation (RAG), and Mainframe code analysis (COBOL/JCL) using AI techniques.',
         'experience.1.title': 'Software Engineer',
         'experience.1.description':
             'Full Stack development of multiple backend solutions with Java and JavaScript/TypeScript using Oracle SQL and MongoDB, and also involved in the design of a website using Angular.',
@@ -60,7 +60,7 @@ export const ui = {
         'about.p4':
             "Later, I pursued a master's degree in <strong>Big Data Analytics</strong> at <strong>Universidad Carlos III de Madrid (UC3M)</strong>, where I deepened my knowledge in data science, machine learning, and large-scale data processing.",
         'about.p5':
-            'Today, I work as a <strong>Data Engineer</strong> at <strong>Carver Advanced Systems</strong>, where I lead projects at the intersection of AI and data — building solutions with <strong>Large Language Models (LLMs)</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong><em class="italic">Mainframe Analysis using AI</em></strong>.',
+            'Today, I work as an <strong>AI / Data Engineer</strong> at <strong>Carver Advanced Systems</strong>, where I lead projects at the intersection of AI and data — building solutions with <strong>Large Language Models (LLMs)</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong><em class="italic">Mainframe code analysis (COBOL/JCL) using AI</em></strong>.',
 
         // Footer
         'footer.about': 'About',
@@ -83,9 +83,9 @@ export const ui = {
     },
     es: {
         // Meta
-        'meta.title': 'Portfolio de Eduard Ferré - Ingeniero de Software',
+        'meta.title': 'Eduard Ferré — Ingeniero de IA / Datos y Software',
         'meta.description':
-            'Contrata a Eduard Ferré para desarrollar aplicaciones full stack. Ingeniero de Software y estudiante de Analítica de Datos. Experiencia con Java, JavaScript/TypeScript, Python y gestión de bases de datos (SQL y noSQL).',
+            'Portfolio de Eduard Ferré, Ingeniero de IA / Datos en Carver Advanced Systems. Soluciones con LLMs, RAG, Grafos de Conocimiento y análisis de código Mainframe (COBOL/JCL). Experiencia en Python, ingeniería de datos y desarrollo full-stack.',
 
         // Nav
         'nav.experience': 'Experiencia',
@@ -97,7 +97,7 @@ export const ui = {
         'hero.badge': 'Abierto a Ofertas',
         'hero.greeting': 'Hola, soy',
         'hero.bio':
-            '+3 años de experiencia profesional. <strong>Ingeniero de Datos</strong> en <strong>Carver Advanced Systems</strong> de Girona, España 🇪🇸. Actualmente trabajo en proyectos con <strong>LLMs</strong>, <strong>Knowledge Graphs con RAG</strong> y <strong>Análisis de Mainframes con IA</strong>. Vivo en Barcelona, cursando un máster online en <strong>Gestión de Proyectos</strong> en <strong>EAE Business School</strong>, especializado en Metodologías Ágiles y Transformación Digital. Apasionado por construir soluciones de datos escalables y aprovechar la IA para impulsar decisiones estratégicas.',
+            '+3 años de experiencia profesional. <strong>Ingeniero de IA / Datos</strong> en <strong>Carver Advanced Systems</strong> de Girona, España 🇪🇸. Actualmente trabajo en proyectos con <strong>LLMs</strong>, <strong>Knowledge Graphs con RAG</strong> y <strong>análisis de código Mainframe (COBOL/JCL) con IA</strong>. Vivo en Barcelona, cursando un máster online en <strong>Gestión de Proyectos</strong> en <strong>EAE Business School</strong>, especializado en Metodologías Ágiles y Transformación Digital. Apasionado por construir soluciones de datos escalables y aprovechar la IA para impulsar decisiones estratégicas.',
 
         // Section titles
         'section.experience': 'Experiencia Laboral',
@@ -105,9 +105,9 @@ export const ui = {
         'section.aboutMe': 'Sobre Mí',
 
         // Experience
-        'experience.0.title': 'Ingeniero de Datos',
+        'experience.0.title': 'Ingeniero de IA / Datos',
         'experience.0.description':
-            'Liderando múltiples proyectos con Modelos de Lenguaje Grande (LLMs), Grafos de Conocimiento con Generación Aumentada por Recuperación (RAG) y Análisis de Mainframes con técnicas de IA.',
+            'Liderando múltiples proyectos con Modelos de Lenguaje Grande (LLMs), Grafos de Conocimiento con Generación Aumentada por Recuperación (RAG) y análisis de código Mainframe (COBOL/JCL) con técnicas de IA.',
         'experience.1.title': 'Ingeniero de Software',
         'experience.1.description':
             'Desarrollo Full Stack de múltiples soluciones backend con Java y JavaScript/TypeScript utilizando Oracle SQL y MongoDB, además de participar en el diseño de un sitio web con Angular.',
@@ -133,7 +133,7 @@ export const ui = {
         'about.p4':
             'Posteriormente, cursé un máster en <strong>Big Data Analytics</strong> en la <strong>Universidad Carlos III de Madrid (UC3M)</strong>, donde profundicé mis conocimientos en ciencia de datos, machine learning y procesamiento de datos a gran escala.',
         'about.p5':
-            'Hoy trabajo como <strong>Ingeniero de Datos</strong> en <strong>Carver Advanced Systems</strong>, donde lidero proyectos en la intersección de la IA y los datos — construyendo soluciones con <strong>Modelos de Lenguaje Grande (LLMs)</strong>, <strong>Grafos de Conocimiento con RAG</strong> y <strong><em class="italic">Análisis de Mainframes con IA</em></strong>.',
+            'Hoy trabajo como <strong>Ingeniero de IA / Datos</strong> en <strong>Carver Advanced Systems</strong>, donde lidero proyectos en la intersección de la IA y los datos — construyendo soluciones con <strong>Modelos de Lenguaje Grande (LLMs)</strong>, <strong>Grafos de Conocimiento con RAG</strong> y <strong><em class="italic">análisis de código Mainframe (COBOL/JCL) con IA</em></strong>.',
 
         // Footer
         'footer.about': 'Sobre Mí',

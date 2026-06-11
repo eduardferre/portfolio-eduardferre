@@ -15,19 +15,90 @@ interface Props {
 }
 
 const { title, description, lang = 'en' } = Astro.props
+
+const SITE = 'https://eduardferre.dev'
+const canonicalURL = new URL(Astro.url.pathname, SITE).href
+const ogImage = new URL('/profileImage.webp', SITE).href
+
+// hreflang alternates (the portfolio is published in en at / and es at /es/)
+const alternates = [
+  { hreflang: 'en', href: `${SITE}/` },
+  { hreflang: 'es', href: `${SITE}/es/` },
+  { hreflang: 'x-default', href: `${SITE}/` }
+]
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Eduard Ferré',
+  alternateName: 'Edu Ferré',
+  url: `${SITE}/`,
+  image: ogImage,
+  jobTitle: 'AI / Data Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Carver Advanced Systems',
+    url: 'https://carver-as.com'
+  },
+  address: {
+    '@type': 'PostalPlace',
+    addressLocality: 'Barcelona',
+    addressCountry: 'ES'
+  },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Universitat Politècnica de Catalunya (UPC)' },
+    { '@type': 'CollegeOrUniversity', name: 'Universidad Carlos III de Madrid (UC3M)' }
+  ],
+  knowsAbout: [
+    'Artificial Intelligence',
+    'Large Language Models',
+    'Retrieval-Augmented Generation',
+    'Knowledge Graphs',
+    'Data Engineering',
+    'Software Engineering'
+  ],
+  sameAs: [
+    'https://github.com/eduardferre',
+    'https://linkedin.com/in/eduardferre'
+  ]
+}
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Eduard Ferré" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Eduard Ferré" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="/profileImage.webp" fetchpriority="high" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
     <ClientRouter />
   </head>
   <body class="relative text-black dark:text-white">
