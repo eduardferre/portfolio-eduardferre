@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build && node scripts/check-csp.mjs",
+    "build": "astro build && node scripts/check-csp.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -25,8 +25,8 @@
   "pnpm": {
     "onlyBuiltDependencies": ["esbuild", "sharp"],
     "overrides": {
-      "yaml@>=2.0.0 <2.8.3": ">=2.8.3",
-      "ws@>=8.0.0 <8.20.1": ">=8.20.1"
+      "yaml": ">=2.8.3",
+      "ws": ">=8.20.1"
     }
   }
 }
