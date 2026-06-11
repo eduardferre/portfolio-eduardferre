@@ -14,19 +14,12 @@
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^10.0.8",
     "@fontsource-variable/onest": "^5.2.11",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.3.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^6.4.6",
     "astro-robots-txt": "^1.0.0",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"],
-    "overrides": {
-      "yaml": ">=2.8.3",
-      "ws": ">=8.20.1"
-    }
   }
 }
