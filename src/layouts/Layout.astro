@@ -68,6 +68,8 @@ const jsonLd = {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
+    <!-- Apply theme before first paint (no FOUC, independent of page-load timing) -->
+    <script is:inline src="/theme-init.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
