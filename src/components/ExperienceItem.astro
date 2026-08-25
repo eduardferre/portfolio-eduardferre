@@ -1,5 +1,8 @@
 ---
 import LinkInLine from './LinkInLine.astro'
+import CountRoll from './CountRoll.astro'
+import CountRoll from './CountRoll.astro'
+import TechBadge from './TechBadge.astro'
 import type { Lang } from '@/i18n/ui'
 import { useTranslations } from '@/i18n/utils'
 
@@ -11,6 +14,16 @@ interface Props {
   company: string
   link?: string
   technologies?: string[]
+  /** Renders a pulsing CURRENT chip — same language as the hub's LIVE badge. */
+  current?: boolean
+  /**
+   * Dashboard-style figures shown under the description. Rendered as a grid
+   * with `gap-px` over a border-coloured background, so the cell dividers stay
+   * correct however the grid wraps.
+   */
+  metrics?: { value: string; label: string; roll?: boolean }[]
+  /** Peer-reviewed output of the role, listed as external links. */
+  publications?: { title: string; venue: string; year: string; href: string }[]
   lang?: Lang
 }
 
@@ -22,61 +35,152 @@ const {
   description,
   link,
   technologies,
+  current = false,
+  metrics,
+  publications,
   lang = 'en'
 } = Astro.props
 
 const t = useTranslations(lang)
+
+// Three figures fit one row from `sm` up; anything else falls back to pairs.
+const metricCols =
+  metrics?.length === 3 ? 'grid-cols-3' : 'grid-cols-2 sm:grid-cols-4'
 ---
 
-<div
-  class="relative mx-12 pb-8 md:pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-black/20 dark:before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+<article
+  class="group relative overflow-hidden rounded-2xl border border-line border-l-[3px] border-l-accent
+         bg-surface p-5 shadow-[0_1px_2px_rgba(15,15,26,0.04)] transition-all duration-300
+         hover:border-line-hover hover:shadow-[0_10px_28px_-20px_var(--accent-glow)] md:p-7"
 >
-  <div class="relative pb-4 md:pb-12 md:col-span-2">
-    <div class="sticky top-0">
-      <span
-        class="text-purple-600 -left-[42px] absolute rounded-full text-5xl mt-4"
-        >&bull;</span
-      >
-      <time class="p-0 m-0 text-sm text-gray-600/80 dark:text-white/80"
-        >{startDate} - {endDate}</time
-      >
-      <h3 class="text-xl font-bold text-purple-600">{title}</h3>
-      <h4 class="font-semibold text-xl text-gray-800 dark:text-white">
-        {company}
-      </h4>
-    </div>
-  </div>
+  <!-- Accent wash that warms up on hover -->
   <div
-    class="relative flex flex-col gap-2 pb-4 text-gray-600 dark:text-gray-300 md:col-span-3"
+    class="pointer-events-none absolute -right-24 -top-24 size-56 rounded-full bg-accent/[0.06] opacity-0
+           blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+    aria-hidden="true"
   >
-    {description}
-    {
-      link && (
-        <LinkInLine href={link}>
-          {t('experience.seeMore')}{' '}
-          <svg
-            class="w-5 icon icon-tabler icon-tabler-chevron-right"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+  </div>
+
+  <div class="relative">
+    <!-- Meta row: dates + current status -->
+    <div class="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <time class="font-mono text-[10px] md:text-[11px] tracking-[0.15em] uppercase text-faint">
+        {startDate} — {endDate}
+      </time>
+      {
+        current && (
+          <span
+            class="inline-flex items-center gap-1.5 rounded border border-emerald-500/40 bg-emerald-500/[0.12] px-2 py-0.5
+                   font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-emerald-700
+                   dark:border-emerald-400/40 dark:bg-emerald-400/[0.12] dark:text-emerald-300"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-        </LinkInLine>
+            <span class="live-dot text-[7px] leading-none" aria-hidden="true">
+              ●
+            </span>
+            {t('experience.current')}
+          </span>
+        )
+      }
+    </div>
+
+    <h3 class="font-display text-xl md:text-2xl font-extrabold leading-tight text-fg">
+      {title}
+    </h3>
+    <p class="mt-1 font-mono text-xs md:text-sm font-bold text-accent">{company}</p>
+
+    <div
+      class="mt-4 text-pretty leading-relaxed text-muted [&>p]:mb-3 [&>p:last-child]:mb-0
+             [&_strong]:font-semibold [&_strong]:text-accent"
+      set:html={description}
+    />
+
+    {
+      metrics && metrics.length > 0 && (
+        <dl
+          class:list={[
+            'mt-6 grid gap-px overflow-hidden rounded-lg border border-line bg-line',
+            metricCols
+          ]}
+        >
+          {metrics.map((metric) => (
+            <div class="bg-surface px-3 py-4 text-center">
+              <dt class="sr-only">{metric.label}</dt>
+              <dd class="font-display text-xl md:text-2xl font-extrabold text-accent">
+                <CountRoll
+                  value={metric.value}
+                  random={metric.roll}
+                  class="justify-center"
+                />
+              </dd>
+              <p class="mt-1 font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-faint">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </dl>
       )
     }
 
-    <!-- <div class="flex flex-wrap gap-x-2 gap-y-2 mt-2 mb-4">
-        {
-          technologies &&
-            technologies.map((tech) => <TechBadge>{tech}</TechBadge>)
-        }
-      </div> -->
+    {
+      publications && publications.length > 0 && (
+        <section class="mt-6">
+          <h4 class="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-faint">
+            {t('experience.publications')}
+            <span class="ml-1 text-accent">[{publications.length}]</span>
+          </h4>
+          <ol class="mt-3 divide-y divide-line overflow-hidden rounded-lg border border-line">
+            {publications.map((publication, index) => (
+              <li>
+                <a
+                  href={publication.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex gap-3 px-3 py-3 transition-colors duration-200 hover:bg-accent-soft md:px-4"
+                >
+                  <span
+                    class="mt-0.5 shrink-0 font-mono text-[10px] tabular-nums text-accent"
+                    aria-hidden="true"
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block text-pretty text-sm leading-snug text-fg">
+                      {publication.title}
+                    </span>
+                    <span class="mt-1 block font-mono text-[10px] md:text-[11px] text-faint">
+                      {publication.venue} · {publication.year}
+                    </span>
+                  </span>
+                  <span class="ml-auto self-center text-accent" aria-hidden="true">
+                    ↗
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    {
+      technologies && technologies.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-1.5">
+          {technologies.map((tech) => (
+            <TechBadge>{tech}</TechBadge>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      link && (
+        <div class="mt-6">
+          <LinkInLine href={link}>
+            {t('experience.seeMore')}
+            <span aria-hidden="true">→</span>
+          </LinkInLine>
+        </div>
+      )
+    }
   </div>
-</div>
+</article>

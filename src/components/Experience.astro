@@ -10,27 +10,42 @@ interface Props {
 const { lang = 'en' } = Astro.props
 const t = useTranslations(lang)
 
-const today = new Date()
-const month = today.toLocaleString(lang === 'es' ? 'es-ES' : 'en-US', {
-  month: 'long'
-})
-const year = today.getFullYear()
+// Years in the Carver role, so the metric never goes stale.
+const CARVER_START = new Date(2025, 7, 1)
+const yearsAtCarver = Math.max(
+  1,
+  Math.floor((Date.now() - CARVER_START.getTime()) / (365.25 * 24 * 3600 * 1000))
+)
+
 
 const EXPERIENCE = [
   {
     startDate: `${t('date.august')} 2025`,
-    endDate: `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`,
+    // Ongoing role: never render a concrete end date, which reads as "left".
+    endDate: t('date.present'),
     title: t('experience.0.title'),
     company: 'Carver Advanced Systems',
     description: t('experience.0.description'),
     link: 'https://carver-as.com',
+    current: true,
+    // Scale figures of the work — no end-client names (NDA).
+    metrics: [
+      { value: `${yearsAtCarver}+`, label: t('metric.years') },
+      { value: '7', label: t('metric.projects') },
+      // Not a real figure — it rolls to a new number on every visit.
+      { value: '365', label: t('metric.coffees'), roll: true }
+    ],
     technologies: [
       'Python',
       'LLMs',
-      'Knowledge Graphs',
+      'Multi-Agent',
       'RAG',
-      'AI',
-      'Mainframe',
+      'Knowledge Graphs',
+      'Neo4j',
+      'OpenAI API',
+      'Azure',
+      'LiteLLM',
+      'COBOL/JCL',
       'Data Engineering'
     ]
   },
@@ -43,7 +58,8 @@ const EXPERIENCE = [
     link: 'https://www.gi-de.com/',
     technologies: [
       'Java',
-      'SQL',
+      'Spring Boot',
+      'Oracle SQL',
       'JavaScript',
       'TypeScript',
       'MongoDB',
@@ -53,7 +69,10 @@ const EXPERIENCE = [
       'API Rest',
       'Jira',
       'Confluence',
-      'Bitbucket'
+      'Bitbucket',
+      'Sourcetree',
+      'Jenkins',
+      'SonarQube'
     ]
   },
   {
@@ -62,13 +81,43 @@ const EXPERIENCE = [
     title: t('experience.2.title'),
     company: 'Universitat Politécnica de Catalunya',
     description: t('experience.2.description'),
-    link: 'https://doi.org/10.3390/proceedings2024097149',
-    technologies: ['Matlab', 'KiCad', 'BenchVue', 'AvaSoft']
+    technologies: ['Matlab', 'KiCad', 'BenchVue', 'AvaSoft'],
+    // Co-authored output of the CELISA project. Titles stay in English (the
+    // language they were published in) in both locales.
+    publications: [
+      {
+        title:
+          'Low-Area PV Cells Under Indoor Artificial Lighting: A Comparative Study',
+        venue: 'IEEE Transactions on Instrumentation and Measurement',
+        year: '2025',
+        href: 'https://ieeexplore.ieee.org/document/10909273'
+      },
+      {
+        title:
+          'Comparative analysis of low-power PV cells of different technologies under different types of indoor artificial lighting',
+        venue: 'IEEE I2MTC',
+        year: '2024',
+        href: 'https://ieeexplore.ieee.org/document/10561134'
+      },
+      {
+        title:
+          'Systematic Experimental Evaluation of Submilliwatt PV Cells for Indoor Applications',
+        venue: 'Eurosensors / MDPI Proceedings',
+        year: '2023',
+        href: 'https://www.mdpi.com/2504-3900/97/1/149'
+      },
+      {
+        title: 'FOCV-MPPT Power Management Unit for Submilliwatt Indoor PV Cells',
+        venue: 'Eurosensors / MDPI Proceedings',
+        year: '2023',
+        href: 'https://www.mdpi.com/2504-3900/97/1/99'
+      }
+    ]
   }
 ]
 ---
 
-<ol class="relative mt-8 md:mt-16">
+<ol class="flex flex-col gap-y-6 md:gap-y-8">
   {
     EXPERIENCE.map((experience) => (
       <li>

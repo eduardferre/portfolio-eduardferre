@@ -16,48 +16,103 @@ const t = useTranslations(lang)
 ---
 
 <div class="max-w-3xl">
-  <div class="flex gap-4 mb-4">
-    <img
-      class="rounded-full shadow-lg size-16"
-      src="/profileImage.webp"
-      alt="Eduard Ferré avatar"
-      width="64"
-      height="64"
-      fetchpriority="high"
-      loading="eager"
-      decoding="async"
-    />
+  <!-- Terminal prompt -->
+  <p
+    class="font-mono text-[11px] font-bold tracking-[0.3em] uppercase mb-6 animate-fade-up"
+    style="animation-delay: 0ms"
+  >
+    <span class="text-faint" aria-hidden="true">$</span>
+    <span class="text-accent">whoami</span>
+  </p>
+
+  <div class="flex flex-row items-start justify-between gap-4 sm:gap-8">
+    <div class="flex-1 min-w-0">
+      <h1
+        class="font-display font-extrabold leading-[0.9] tracking-tight text-fg animate-fade-up"
+        style="animation-delay: 80ms"
+      >
+        <span class="sr-only">{t('hero.greeting')} </span>
+        <span class="name-gradient block" style="font-size: clamp(2.2rem, 9vw, 4.5rem)">Eduard</span>
+        <span class="name-gradient block" style="font-size: clamp(2.2rem, 9vw, 4.5rem)">Ferré</span>
+      </h1>
+
+      <p
+        class="font-mono text-xs sm:text-sm mt-5 font-bold text-muted animate-fade-up"
+        style="animation-delay: 140ms"
+      >
+        {t('hero.role')}<span class="animate-blink font-bold ml-px text-accent">_</span>
+      </p>
+    </div>
+
+    <!-- Avatar with animated conic border -->
+    <div
+      class="avatar-frame shrink-0 animate-fade-up w-[88px] h-[88px] sm:w-36 sm:h-36 md:w-44 md:h-44"
+      style="animation-delay: 40ms"
+    >
+      <div class="w-full h-full rounded-[13px] overflow-hidden">
+        <img
+          src="/landingImage.jpg"
+          alt="Eduard Ferré"
+          width="176"
+          height="176"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full scale-[1.7] object-cover object-[50%_34%]"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Availability chip -->
+  <div class="mt-8 animate-fade-up" style="animation-delay: 200ms">
     <a
       href="https://linkedin.com/in/eduardferre"
       target="_blank"
       rel="noopener noreferrer"
-      class="flex items-center md:justify-center md:hover:scale-105 transition"
+      class="inline-flex hover:scale-[1.03] transition"
     >
       <Badge>{t('hero.badge')}</Badge>
     </a>
   </div>
-  <h1
-    class="text-gray-800 dark:text-white tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex flex-row gap-x-2"
-  >
-    {t('hero.greeting')}<span class="text-purple-600">Eduard Ferré</span>
-  </h1>
+
   <p
-    class="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-200 [&>strong]:text-purple-600 dark:[&>strong]:text-purple-400 [&>strong]:font-semibold"
+    class="mt-6 text-base sm:text-lg leading-relaxed text-muted [&>strong]:text-accent [&>strong]:font-semibold animate-fade-up"
+    style="animation-delay: 260ms"
     set:html={t('hero.bio')}
   />
 
-  <nav class="flex flex-wrap gap-4 mt-8">
+  <nav
+    class="flex flex-wrap gap-3 mt-8 animate-fade-up"
+    style="animation-delay: 320ms"
+  >
     <SocialBadge href="https://linkedin.com/in/eduardferre">
-      <LinkedInIcon class="size-4 lg:size-6" />
+      <LinkedInIcon class="size-4" />
       LinkedIn
     </SocialBadge>
     <SocialBadge href="https://github.com/eduardferre">
-      <GitHubIcon class="size-4 lg:size-6" />
+      <GitHubIcon class="size-4" />
       GitHub
     </SocialBadge>
     <SocialBadge href="mailto:eduardferresanchez@gmail.com">
-      <GmailIcon class="size-4 lg:size-6" />
+      <GmailIcon class="size-4" />
       eduardferresanchez@gmail.com
     </SocialBadge>
   </nav>
 </div>
+
+<style>
+  /* The name is the loudest thing on the page — a gradient keeps it from
+     reading as flat grey text. */
+  .name-gradient {
+    background: linear-gradient(
+      110deg,
+      var(--text-primary) 0%,
+      var(--text-primary) 35%,
+      var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

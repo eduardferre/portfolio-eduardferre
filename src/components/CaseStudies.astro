@@ -1,0 +1,77 @@
+---
+import CaseStudyItem from './CaseStudyItem.astro'
+import type { Lang } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const t = useTranslations(lang)
+
+// Both cases come from the Carver work. Client names stay out (NDA): only the
+// sector, the scale figures and the architecture are described.
+const CASES = [
+  {
+    index: 1,
+    tag: t('case.rdarr.tag'),
+    title: t('case.rdarr.title'),
+    context: t('case.rdarr.context'),
+    challenge: t('case.rdarr.challenge'),
+    pipeline: [
+      'COBOL / JCL',
+      'AST',
+      lang === 'es' ? 'Malla de agentes' : 'Agent mesh',
+      lang === 'es' ? 'Grafo de linaje' : 'Lineage graph',
+      lang === 'es' ? 'Informe BCE' : 'ECB report'
+    ],
+    steps: [1, 2, 3, 4].map((n) => ({
+      title: t(`case.rdarr.step.${n}.title` as never),
+      body: t(`case.rdarr.step.${n}.body` as never)
+    })),
+    outcome: t('case.rdarr.outcome'),
+    stack: [
+      'Python',
+      'Multi-Agent',
+      'AST',
+      'OpenAI API',
+      'Azure',
+      'PostgreSQL',
+      'Prompt Engineering'
+    ]
+  },
+  {
+    index: 2,
+    tag: t('case.kg.tag'),
+    title: t('case.kg.title'),
+    context: t('case.kg.context'),
+    challenge: t('case.kg.challenge'),
+    pipeline: [
+      lang === 'es' ? 'Repos multi-lenguaje' : 'Multi-language repos',
+      'AST',
+      lang === 'es' ? 'Resumen con LLM' : 'LLM enrichment',
+      'Neo4j + embeddings',
+      lang === 'es' ? 'Respuestas RAG' : 'RAG answers'
+    ],
+    steps: [1, 2, 3, 4].map((n) => ({
+      title: t(`case.kg.step.${n}.title` as never),
+      body: t(`case.kg.step.${n}.body` as never)
+    })),
+    outcome: t('case.kg.outcome'),
+    stack: [
+      'Python',
+      'Neo4j',
+      'AST',
+      'Knowledge Graphs',
+      'Embeddings',
+      'RAG',
+      'OpenAI API'
+    ]
+  }
+]
+---
+
+<div class="flex flex-col gap-y-6 md:gap-y-8">
+  {CASES.map((caseStudy) => <CaseStudyItem {...caseStudy} lang={lang} />)}
+</div>

@@ -17,92 +17,181 @@ interface Props {
   image: string
   tags: {
     name: string
-    class: string
     icon: (_props: Record<string, any>) => any
   }[]
+  /** Short mono label above the title (e.g. FinTech, Mobile). */
+  tag?: string
+  /** Decorative glyph echoed from the hub's project cards. */
+  icon?: string
+  /** Shows the pulsing LIVE chip. */
+  live?: boolean
 }
 
-const { title, description, link, github, image, tags } = Astro.props
+const { title, description, link, github, image, tags, tag, icon, live } =
+  Astro.props
+
+const transitionKey = title.replace(/[^a-zA-Z]/g, '')
 ---
 
 <article
-  class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0"
+  class="group relative overflow-hidden rounded-2xl border border-line bg-surface
+         shadow-[0_1px_2px_rgba(15,15,26,0.04)] transition-all duration-300
+         hover:border-line-hover hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_var(--accent-glow)]"
 >
-  <div class="w-full md:w-1/2">
-    <h3 class="md:hidden text-2xl font-bold text-purple-600 mb-4">{title}</h3>
-    <a
-      class="relative flex flex-col items-center col-span-6 row-span-5 gap-8
-            transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl
-            lg:border lg:border-gray-800 lg:hover-gray-700 lg:hover:bg-gray-800/50"
-      href={link && link.href}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        src={image}
-        alt={`Screenshot from project: ${title}`}
-        loading="lazy"
-        transition:name={`project-${title.replace(/[^a-zA-Z]/g, '')}`}
-        transition:persist={`project-persist-${title.replace(/[^a-zA-Z]/g, '')}`}
-        class="object-cover object-top w-full aspect-video md:scale-110
-             transition duration-500 md:group-hover:scale-105"
-      />
-    </a>
-    <footer class="flex flex-wrap items-end justify-start gap-x-2 gap-y-2 mt-4">
-      {
-        github &&
-          github.map((repo) => (
-            <LinkButton href={repo.href}>
-              <GitHubIcon class="size-4" />
-              <span class="text-s">{repo.name}</span>
-            </LinkButton>
-          ))
-      }
-      {
-        link && (
-          <LinkButton href={link.href}>
-            <ExternalLinkIcon class="size-4" />
-            <span class="text-s">{link.name}</span>
-          </LinkButton>
-        )
-      }
-    </footer>
-  </div>
+  <!-- Accent hairline that lights up on hover -->
+  <div class="accent-line absolute inset-x-0 top-0 h-px transition-all duration-500"></div>
 
-  <div class="w-full md:w-1/2 md:max-w-lg">
-    <h3 class="hidden md:block text-2xl font-bold text-purple-600 mb-2">{title}</h3>
-    <div class="flex flex-wrap mt-2 w-full">
-      <div class="relative flex overflow-hidden w-full group/carousel mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <ul class="flex flex-row gap-x-2 animate-carousel whitespace-nowrap min-w-max group-hover/carousel:[animation-play-state:paused] py-1">
-          {
-            [...tags, ...tags, ...tags].map((tag) => (
-              <li>
-                <span
-                  class={`flex items-center gap-x-2 rounded-full text-xs md:text-sm font-medium transition duration-300 hover:scale-105 ${tag.class} py-1 px-3 shadow-sm`}
-                >
-                  <tag.icon class="size-4" />
-                  {tag.name}
-                </span>
-              </li>
-            ))
-          }
-        </ul>
+  {
+    icon && (
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute right-5 top-4 select-none font-display text-4xl font-extrabold text-accent
+               opacity-[0.12] transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
+      >
+        {icon}
+      </span>
+    )
+  }
+
+  <!--
+    Layout: on desktop the media sits left and the meta/tech/links stack right,
+    with the description spanning the full width underneath — otherwise the
+    shorter column leaves a big void under the screenshot. On mobile the whole
+    thing collapses into one column (`contents` flattens the wrappers) ordered
+    title → image → tech → links → description.
+  -->
+  <div class="relative flex flex-col gap-5 p-5 md:gap-6 md:p-7">
+    <div class="contents md:flex md:flex-row md:items-start md:gap-8">
+      <!-- Preview -->
+      <div class="order-2 md:order-1 md:w-1/2 md:shrink-0">
+        <a
+          class="block overflow-hidden rounded-xl border border-line transition duration-500
+                 md:group-hover:shadow-xl"
+          href={link && link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={image}
+            alt={`Screenshot from project: ${title}`}
+            loading="lazy"
+            transition:name={`project-${transitionKey}`}
+            transition:persist={`project-persist-${transitionKey}`}
+            class="aspect-video w-full object-cover object-top transition duration-500 md:group-hover:scale-[1.03]"
+          />
+        </a>
       </div>
 
-      <div class="mt-2 text-pretty text-gray-700 dark:text-gray-400">
-        {description}
+      <!-- Meta + title + stack + links -->
+      <div class="contents md:flex md:w-1/2 md:flex-col md:order-2">
+        <div class="order-1">
+          <div class="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+            {
+              tag && (
+                <span class="inline-flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.25em] uppercase text-accent">
+                  <span class="size-1.5 rounded-full bg-accent" aria-hidden="true" />
+                  {tag}
+                </span>
+              )
+            }
+            {
+              live && (
+                <span
+                  class="inline-flex items-center gap-1.5 rounded border border-emerald-500/40 bg-emerald-500/[0.12] px-2 py-0.5
+                         font-mono text-[9px] tracking-[0.2em] uppercase text-emerald-700
+                         dark:border-emerald-400/40 dark:bg-emerald-400/[0.12] dark:text-emerald-300"
+                >
+                  <span class="live-dot text-[7px] leading-none" aria-hidden="true">
+                    ●
+                  </span>
+                  live
+                </span>
+              )
+            }
+          </div>
+
+          <h3 class="font-display text-xl md:text-2xl font-extrabold leading-tight text-fg">
+            {title}
+          </h3>
+        </div>
+
+        <!-- Tech carousel -->
+        <div class="order-3 flex w-full flex-wrap md:mt-5">
+          <div
+            class="group/carousel relative flex w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+          >
+            <ul
+              class="animate-carousel flex min-w-max flex-row gap-x-2 whitespace-nowrap py-1 group-hover/carousel:[animation-play-state:paused]"
+            >
+              {
+                [...tags, ...tags, ...tags].map((techTag) => (
+                  <li>
+                    <span
+                      class="flex items-center gap-x-2 rounded-md border border-line bg-surface-hover px-2.5 py-1 font-mono text-[10px] text-muted transition duration-300 md:text-[11px]"
+                    >
+                      <techTag.icon class="size-3.5" />
+                      {techTag.name}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <footer class="order-4 flex flex-wrap items-end justify-start gap-2 md:mt-5">
+          {
+            github &&
+              github.map((repo) => (
+                <LinkButton href={repo.href}>
+                  <GitHubIcon class="size-4" />
+                  <span>{repo.name}</span>
+                </LinkButton>
+              ))
+          }
+          {
+            link && (
+              <LinkButton href={link.href}>
+                <ExternalLinkIcon class="size-4" />
+                <span>{link.name}</span>
+              </LinkButton>
+            )
+          }
+        </footer>
       </div>
     </div>
+
+    <!-- Description, full width under both columns -->
+    <p class="order-5 text-pretty leading-relaxed text-muted">{description}</p>
   </div>
 </article>
 
 <style>
+  .accent-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent) 35%, transparent),
+      transparent
+    );
+  }
+
+  .group:hover .accent-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent) 80%, transparent),
+      transparent
+    );
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
   @keyframes carousel {
     0% {
       transform: translateX(0);
     }
     100% {
-      /* We loop exactly one third of the total width since array is duplicated 3 times */
+      /* Loop exactly one third: the tag array is rendered three times. */
       transform: translateX(calc(-33.333333%));
     }
   }

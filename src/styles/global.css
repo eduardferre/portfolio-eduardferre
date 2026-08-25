@@ -1,36 +1,208 @@
 @import "tailwindcss";
+
+/* Display + mono carry the terminal look shared with eduardferre.dev.
+   Onest stays for long-form prose only (About Me, descriptions). */
+@import "@fontsource-variable/syne/index.css";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
 @import "@fontsource-variable/onest/index.css";
 
 /* Class-based dark mode: toggle .dark on <html> */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  :root {
-    color-scheme: light dark;
-  }
+/* ── Design tokens ─────────────────────────────────────────────
+   Mirrors the token set of the eduardferre.dev hub so both sites
+   share one visual language. The accent stays violet in both
+   themes (lightened in dark mode for contrast). */
+:root {
+  --bg: #f6f4ef;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1eefa;
+  --text-primary: #0b0b16;
+  --text-muted: #43435e;
+  --text-faint: #74748f;
+  --border: rgba(15, 15, 26, 0.14);
+  --border-hover: rgba(109, 40, 217, 0.45);
+  --dot-color: rgba(15, 15, 26, 0.1);
+  --vignette: rgba(246, 244, 239, 0.7);
+  --accent: #6d28d9;
+  --accent-2: #0d9488;
+  --accent-soft: rgba(109, 40, 217, 0.12);
+  --accent-glow: rgba(109, 40, 217, 0.22);
+  color-scheme: light;
+}
 
+.dark {
+  --bg: #08080f;
+  --bg-card: #12121f;
+  --bg-card-hover: #1a1a2e;
+  --text-primary: #f0efff;
+  --text-muted: #b3b2d6;
+  --text-faint: #6e6d92;
+  --border: rgba(255, 255, 255, 0.14);
+  --border-hover: rgba(183, 139, 255, 0.55);
+  --dot-color: rgba(255, 255, 255, 0.1);
+  --vignette: rgba(8, 8, 15, 0.6);
+  --accent: #b78bff;
+  --accent-2: #2dd4bf;
+  --accent-soft: rgba(183, 139, 255, 0.16);
+  --accent-glow: rgba(183, 139, 255, 0.3);
+  color-scheme: dark;
+}
+
+/* Expose the tokens as Tailwind utilities (bg-surface, text-muted,
+   border-line, text-accent, font-display…). `inline` keeps the var()
+   reference so the theme switch applies without regenerating classes. */
+@theme inline {
+  --color-canvas: var(--bg);
+  --color-surface: var(--bg-card);
+  --color-surface-hover: var(--bg-card-hover);
+  --color-fg: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-line: var(--border);
+  --color-line-hover: var(--border-hover);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-glow: var(--accent-glow);
+
+  --font-display: 'Syne Variable', 'Syne', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Onest Variable', system-ui, sans-serif;
+}
+
+@layer base {
   html {
-    font-family: 'Onest Variable', system-ui, sans-serif;
+    font-family: var(--font-sans);
     scroll-behavior: smooth;
+    background-color: var(--bg);
   }
 
   body {
-    color: rgba(17, 17, 17, 0.9);
+    /* Sin background propio: los planos atmosféricos van en z-index negativo
+       y el color de fondo lo aporta <html>. */
+    background-color: transparent;
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
-  }
 
-  @media (prefers-color-scheme: dark) {
-    body {
-      color: rgba(255, 255, 255, 0.9);
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
+}
+
+/* ── Atmospheric background (shared with the hub) ─────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.vignette {
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    transparent 40%,
+    var(--vignette) 100%
+  );
+}
+
+/* ── Avatar frame — animated conic border ─────────────────────── */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.avatar-frame {
+  padding: 3px;
+  border-radius: 1rem;
+  background: conic-gradient(
+    from var(--border-angle),
+    #080810,
+    #3b0764,
+    #7c3aed,
+    #c084fc,
+    #7c3aed,
+    #3b0764,
+    #080810
+  );
+  animation: borderSweep 4s linear infinite;
+}
+
+@keyframes borderSweep {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* ── Motion ───────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.live-dot {
+  animation: livePulse 2s ease-in-out infinite;
 }

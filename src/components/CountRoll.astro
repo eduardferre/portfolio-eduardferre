@@ -1,0 +1,151 @@
+---
+/**
+ * Odometer-style number. Every digit sits in a clipped window over a strip of
+ * 0-9 cycles and rolls down into place on load; non-digit characters (a `+`,
+ * a decimal point) are rendered statically alongside.
+ *
+ * With `random`, the landing value is picked in [min, max] on every visit
+ * instead of being the one rendered server-side.
+ *
+ * The server-rendered output already reads `value`, so the figure is correct
+ * without JS and for anyone who asked for reduced motion.
+ */
+interface Props {
+  /** Rendered as-is on the server, and the landing value unless `random`. */
+  value: string
+  random?: boolean
+  min?: number
+  max?: number
+  class?: string
+}
+
+const { value, random = false, min = 100, max = 999, class: className } = Astro.props
+
+const chars = value.split('')
+const isDigit = (char: string) => /\d/.test(char)
+// Each digit position spins one turn more than the one before it, so they
+// settle left to right. The strip has to be long enough for those turns.
+const cyclesFor = (position: number) => 2 + position
+
+let digitPosition = -1
+---
+
+<span
+  class:list={['count-roll inline-flex tabular-nums', className]}
+  data-random={random ? 'true' : undefined}
+  data-min={min}
+  data-max={max}
+  aria-label={value}
+>
+  {
+    chars.map((char) => {
+      if (!isDigit(char)) {
+        return (
+          <span class="count-roll-static" aria-hidden="true">
+            {char}
+          </span>
+        )
+      }
+
+      digitPosition += 1
+      const cycles = cyclesFor(digitPosition)
+
+      return (
+        <span class="count-roll-window" aria-hidden="true">
+          <span class="count-roll-strip">
+            <span class="count-roll-digit">{char}</span>
+            {Array.from({ length: cycles * 10 }, (_, i) => (
+              <span class="count-roll-digit">{i % 10}</span>
+            ))}
+          </span>
+        </span>
+      )
+    })
+  }
+</span>
+
+<style>
+  .count-roll {
+    /* Window height is exactly one digit; keep both in the same unit. */
+    --digit-height: 1.1em;
+    line-height: 1.1;
+  }
+
+  .count-roll-window {
+    display: block;
+    height: var(--digit-height);
+    overflow: hidden;
+  }
+
+  .count-roll-static {
+    display: block;
+    height: var(--digit-height);
+  }
+
+  .count-roll-strip {
+    display: block;
+    will-change: transform;
+  }
+
+  .count-roll-digit {
+    display: block;
+    height: var(--digit-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .count-roll-strip {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  function rollAll() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    document.querySelectorAll<HTMLElement>('.count-roll').forEach((root) => {
+      // One roll per element: a fresh navigation swaps the DOM, so the flag
+      // goes with it and the next page rolls again.
+      if (root.dataset.rolled) return
+      root.dataset.rolled = '1'
+
+      const strips = root.querySelectorAll<HTMLElement>('.count-roll-strip')
+      if (!strips.length) return
+
+      let target: string
+      if (root.dataset.random) {
+        const min = Number(root.dataset.min ?? 100)
+        const max = Number(root.dataset.max ?? 999)
+        const value = Math.floor(min + Math.random() * (max - min + 1))
+        target = String(value).padStart(strips.length, '0')
+        root.setAttribute('aria-label', String(value))
+      } else {
+        // Land back on the digits already rendered — the roll is the effect.
+        target = Array.from(strips, (strip) => strip.firstElementChild?.textContent?.trim() ?? '0').join('')
+      }
+
+      strips.forEach((strip, i) => {
+        const digit = Number(target[i])
+        // Skip the rendered digit at index 0, spin this position's turns, then
+        // land on the target digit. Mirrors `cyclesFor` in the markup above.
+        const offset = 1 + (2 + i - 1) * 10 + digit
+        const duration = 1100 + i * 260
+
+        strip.style.transition = reduced
+          ? 'none'
+          : `transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`
+        strip.style.transform = `translateY(calc(${-offset} * var(--digit-height)))`
+      })
+    })
+  }
+
+  // `astro:page-load` can fire before this module evaluates on a cold load, so
+  // run once directly as well; the per-element flag keeps it to one roll.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', rollAll)
+  } else {
+    rollAll()
+  }
+
+  document.addEventListener('astro:page-load', rollAll)
+</script>

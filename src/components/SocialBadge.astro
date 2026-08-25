@@ -1,18 +1,16 @@
+---
+const { href, ...rest } = Astro.props
+const isMail = typeof href === 'string' && href.startsWith('mailto:')
+---
+
 <a
-  class="flex items-center group"
-  {...Astro.props}
-  target="_blank"
-  rel="noopener noreferrer"
-  role="link"
+  href={href}
+  {...rest}
+  target={isMail ? undefined : '_blank'}
+  rel={isMail ? undefined : 'noopener noreferrer'}
+  class="group inline-flex items-center gap-x-2 rounded-lg border border-line bg-surface px-3 py-2
+         font-mono text-[11px] sm:text-xs text-muted
+         transition-colors duration-200 hover:border-accent/60 hover:text-accent hover:bg-accent-soft"
 >
-  <span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
-    <span
-      class="absolute inset-[-1000%] bg-white/20 group-hover:animate-[spin_2s_linear_infinite] group-hover:bg-[conic-gradient(from_90deg_at_50%_50%,#993299_0%,#3e2155_50%,#993299_100%)]"
-    ></span>
-    <div
-      class="inline-flex gap-x-2 items-center justify-center w-full px-3 py-1 md:py-2 md:px-4 text-sm lg:text-base rounded-full cursor-pointer bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap hover:bg-white hover:text-purple-600 dark:hover:bg-gray-900 dark:hover:text-purple-400 transition"
-    >
-      <slot />
-    </div>
-  </span>
+  <slot />
 </a>

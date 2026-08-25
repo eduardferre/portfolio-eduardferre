@@ -18,7 +18,7 @@ const { title, description, lang = 'en' } = Astro.props
 
 const SITE = 'https://eduardferre.dev'
 const canonicalURL = new URL(Astro.url.pathname, SITE).href
-const ogImage = new URL('/profileImage.webp', SITE).href
+const ogImage = new URL('/landingImage.jpg', SITE).href
 
 // hreflang alternates (the portfolio is published in en at / and es at /es/)
 const alternates = [
@@ -76,7 +76,8 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="author" content="Eduard Ferré" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#030712" />
+    <meta name="theme-color" content="#07070A" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F7F6F2" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
@@ -98,18 +99,33 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="/profileImage.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/landingImage.jpg" fetchpriority="high" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
     <ClientRouter />
   </head>
-  <body class="relative text-black dark:text-white">
-    <div
-      class="fixed inset-0 z-[-2]
-        bg-gray-50 dark:bg-gray-950
-        bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]
-        dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
-    >
+  <body class="relative text-fg">
+    <!-- Atmospheric background: dotted grid + vignette + colour auras.
+         Same treatment as the eduardferre.dev hub. -->
+    <div class="dot-grid fixed inset-0 z-[-3] pointer-events-none" aria-hidden="true"></div>
+    <div class="vignette fixed inset-0 z-[-2] pointer-events-none" aria-hidden="true"></div>
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none" aria-hidden="true">
+      <div
+        class="absolute -top-32 -left-16 w-[520px] h-[520px] rounded-full bg-violet-500/[0.09] dark:bg-violet-500/[0.10] blur-[110px]"
+      >
+      </div>
+      <div
+        class="absolute top-[38%] left-[42%] w-[420px] h-[420px] rounded-full bg-teal-400/[0.07] dark:bg-cyan-400/[0.07] blur-[110px]"
+      >
+      </div>
+      <div
+        class="absolute top-8 right-[-4rem] w-[420px] h-[420px] rounded-full bg-fuchsia-400/[0.06] dark:bg-fuchsia-500/[0.07] blur-[110px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-[10%] w-[400px] h-[400px] rounded-full bg-amber-300/[0.07] dark:bg-amber-400/[0.05] blur-[120px]"
+      >
+      </div>
     </div>
     <Header lang={lang} />
     <slot />

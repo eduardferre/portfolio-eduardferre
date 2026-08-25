@@ -1,0 +1,36 @@
+---
+// Terminal-style section heading: `$ command`, mirroring the `$ whoami`
+// prompt used across the eduardferre.dev hub.
+interface Props {
+  command: string
+  title: string
+}
+
+const { command, title } = Astro.props
+---
+
+<div class="mb-8 flex items-center gap-3 md:mb-10">
+  <h2
+    class="flex items-center gap-2 whitespace-nowrap rounded-lg border border-line bg-surface px-3 py-1.5
+           font-mono text-[11px] font-bold tracking-[0.3em] uppercase shadow-[0_1px_2px_rgba(15,15,26,0.04)] md:text-xs"
+  >
+    <span class="text-accent/70" aria-hidden="true">$</span>
+    <span class="text-accent">{command}</span>
+    <span class="sr-only">{title}</span>
+  </h2>
+  <div class="section-rule h-px flex-1"></div>
+</div>
+
+<style>
+  /* Fades from the accent into the plain hairline, so the heading has a bit of
+     colour instead of a flat grey rule across the page. */
+  .section-rule {
+    background: linear-gradient(
+      90deg,
+      var(--accent) 0%,
+      color-mix(in srgb, var(--accent) 30%, transparent) 22%,
+      var(--border) 60%,
+      transparent 100%
+    );
+  }
+</style>

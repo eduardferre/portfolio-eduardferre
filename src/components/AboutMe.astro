@@ -8,28 +8,90 @@ interface Props {
 
 const { lang = 'en' } = Astro.props
 const t = useTranslations(lang)
+
+const FACTS = [
+  ['about.fact.based', 'about.fact.basedValue'],
+  ['about.fact.now', 'about.fact.nowValue'],
+  ['about.fact.focus', 'about.fact.focusValue']
+] as const
 ---
 
 <article
-  class="flex flex-col justify-center items-center gap-8 md:flex-row
-              text-gray-700 dark:text-gray-300"
+  class="relative overflow-hidden rounded-2xl border border-line bg-surface p-5 text-muted
+         shadow-[0_1px_2px_rgba(15,15,26,0.04)] md:p-7"
 >
+  <!-- Accent wash, same treatment as the experience cards -->
   <div
-    class="[&>p]:mb-4 [&>p>strong]:text-purple-900 dark:[&>p>strong]:text-purple-600 [&>p>strong]:font-normal [&>p>strong]:font-mono order-2 md:order-1"
+    class="pointer-events-none absolute -left-24 -top-28 size-64 rounded-full bg-accent/10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!--
+    The two photos are floated into the copy — one right, one left — so the text
+    wraps around them instead of sitting in a separate column. On mobile they
+    stop floating and become centred blocks between paragraphs.
+  -->
+  <div
+    class="relative leading-relaxed [&>p]:mb-4 [&>p:last-child]:mb-0
+           [&_strong]:font-semibold [&_strong]:text-accent"
   >
     <p set:html={t('about.p1')} />
+
+    <figure class="mx-auto my-5 w-40 rotate-2 md:float-right md:my-1 md:ml-7 md:w-56">
+      <img
+        loading="lazy"
+        src="/profileImage.webp"
+        alt="Eduard Ferré at work"
+        width="256"
+        height="256"
+        class="aspect-square w-full rounded-2xl border border-line object-cover object-top shadow-lg"
+      />
+      <figcaption
+        class="mt-2 text-center font-mono text-[10px] tracking-[0.15em] uppercase text-faint"
+      >
+        {t('about.photo.portrait')}
+      </figcaption>
+    </figure>
+
     <p set:html={t('about.p2')} />
     <p set:html={t('about.p3')} />
+
+    <figure class="mx-auto my-5 w-40 -rotate-2 md:float-left md:my-1 md:mr-7 md:w-56">
+      <img
+        loading="lazy"
+        transition:name="about-photo"
+        transition:persist="about-photo"
+        src="/aboutImage.webp"
+        alt="Eduard Ferré off the clock"
+        width="256"
+        height="256"
+        class="aspect-square w-full rounded-2xl border border-line object-cover shadow-lg"
+        style="object-position: 50% 50%;"
+      />
+      <figcaption
+        class="mt-2 text-center font-mono text-[10px] tracking-[0.15em] uppercase text-faint"
+      >
+        {t('about.photo.candid')}
+      </figcaption>
+    </figure>
+
     <p set:html={t('about.p4')} />
     <p set:html={t('about.p5')} />
+    <p set:html={t('about.p6')} />
+
+    <div class="clear-both"></div>
+
+    <!-- Quick facts, terminal-style -->
+    <dl class="mt-7 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3">
+      {
+        FACTS.map(([key, value]) => (
+          <div class="bg-surface px-4 py-3 font-mono text-[11px]">
+            <dt class="tracking-[0.2em] uppercase text-faint">{t(key)}</dt>
+            <dd class="mt-1 text-pretty text-fg">{t(value)}</dd>
+          </div>
+        ))
+      }
+    </dl>
   </div>
-  <img
-    loading="lazy"
-    transition:name="about-photo"
-    transition:persist="about-photo"
-    src="/aboutImage.webp"
-    alt="Eduard Ferré about me photo"
-    class="order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-purple-800/30 dark:bg-purple-200 ring-1 ring-purple-800/60 dark:ring-white/20"
-    style="object-position: 50% 50%;"
-  />
 </article>

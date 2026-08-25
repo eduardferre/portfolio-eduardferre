@@ -38,26 +38,29 @@ const switchLang: Lang = lang === 'en' ? 'es' : 'en'
 const switchUrl = getLocalizedPathname(Astro.url.pathname, switchLang)
 ---
 
-<header
-  class="fixed top-0 z-10 flex justify-center items-center w-full mx-auto mt-2"
->
+<header class="fixed top-0 z-20 mx-auto mt-3 flex w-full items-center justify-center px-4">
   <nav
-    class="flex px-3 font-medium rounded-full text-xs text-gray-600 dark:text-gray-100 justify-center items-center sm:text-sm"
+    class="flex max-w-full flex-wrap items-center justify-center gap-x-1 rounded-full px-2 py-1
+           font-mono text-[10px] font-bold tracking-wider text-muted sm:gap-x-2 sm:text-[11px]"
   >
     {
       navItems.map((link) => (
         <a
-          class="relative block px-2 py-2 transition hover:text-purple-900 dark:hover:text-purple-600 sm:px-4 md:px-6"
+          class:list={[
+            'relative block rounded-full px-2 py-1.5 transition-colors hover:text-accent sm:px-3',
+            link.label === 'contact' && 'hidden sm:block'
+          ]}
           aria-label={link.label}
           href={link.url}
         >
-          {link.title}
+          {link.title.toLowerCase()}
         </a>
       ))
     }
+    <span class="text-faint" aria-hidden="true">|</span>
     <a
       href={switchUrl}
-      class="relative block px-2 py-2 transition hover:text-purple-900 dark:hover:text-purple-600 sm:px-3 text-xs sm:text-sm font-semibold"
+      class="relative block rounded-full px-2 py-1.5 font-bold transition-colors hover:text-accent"
       aria-label={`Switch to ${languages[switchLang]}`}
     >
       {switchLang.toUpperCase()}
@@ -71,14 +74,14 @@ const switchUrl = getLocalizedPathname(Astro.url.pathname, switchLang)
     const sections = document.querySelectorAll('section')
     const navItems = document.querySelectorAll('header nav a')
 
-    const callback = (entries: any[]) => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navItems.forEach((item) => {
             if (item.getAttribute('aria-label') == entry.target.id) {
-              item.classList.add('text-purple-600')
+              item.classList.add('text-accent')
             } else {
-              item.classList.remove('text-purple-600')
+              item.classList.remove('text-accent')
             }
           })
         }
@@ -111,23 +114,25 @@ const switchUrl = getLocalizedPathname(Astro.url.pathname, switchLang)
 <style>
   @reference "../styles/global.css";
 
+  /* Scroll-driven: the pill materialises as the page scrolls away from the top. */
   nav {
-    animation: nav-shadown 1s linear both;
+    animation: nav-surface 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
-    @apply dark:bg-gray-800/50 bg-white/50;
+    border: 1px solid transparent;
   }
 
-  @keyframes nav-shadown {
+  @keyframes nav-surface {
     from {
       background-color: transparent;
+      border-color: transparent;
+      backdrop-filter: blur(0px);
     }
     to {
-      box-shadow:
-        0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -4px rgb(0 0 0 / 0.1),
-        0 0 0 1px rgb(255 255 255 / 0.1);
-      backdrop-filter: blur(8px);
+      background-color: color-mix(in srgb, var(--bg-card) 70%, transparent);
+      border-color: var(--border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
   }
 </style>

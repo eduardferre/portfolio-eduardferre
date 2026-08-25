@@ -22,7 +22,7 @@ const THEMES = [
 <div class="relative ml-1 mr-1">
   <button
     id="theme-toggle-btn"
-    class="appearance-none border-none flex hover:scale-125 transition cursor-pointer"
+    class="appearance-none border-none flex text-muted hover:text-accent transition cursor-pointer"
   >
     <span class="sr-only">{t('theme.srOnly')}</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
@@ -37,13 +37,14 @@ const THEMES = [
   </button>
   <div
     id="themes-menu"
-    class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-32 rounded-md border border-gray-100 bg-white/90 dark:bg-gray-900/90 dark:border-gray-500/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
+    class="absolute hidden scale-80 top-8 right-0 min-w-32 rounded-lg border border-line bg-surface/95 p-1
+           font-mono text-[11px] text-muted shadow-[0_8px_24px_rgb(0,0,0,0.15)] backdrop-blur-md"
   >
     <ul>
       {
         THEMES.map((theme) => (
           <li
-            class="themes-menu-option px-2 py-1.5 cursor-pointer hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm"
+            class="themes-menu-option cursor-pointer rounded px-2 py-1.5 lowercase transition-colors hover:bg-accent-soft hover:text-accent"
             data-theme={theme.key}
           >
             {theme.label}

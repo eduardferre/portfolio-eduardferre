@@ -1,13 +1,12 @@
-<div class="flex items-center">
-  <span class="relative inline-flex overflow-hidden rounded-full p-[1px]">
-    <span
-      class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#51E4B8_0%,#21554E_50%,#51E4B8_100%)]"
-    ></span>
-    <div
-      class="inline-flex items-center justify-center w-full px-3 py-1 text-sm rounded-full cursor-pointer
-          text-green-800 bg-green-100 dark:bg-gray-800 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap"
-    >
-      <slot />
-    </div>
-  </span>
-</div>
+---
+// Status chip — same family as the `LIVE` badge on the eduardferre.dev hub.
+---
+
+<span
+  class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/[0.08] px-3 py-1
+         font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-emerald-700
+         dark:border-emerald-400/25 dark:bg-emerald-400/[0.07] dark:text-emerald-300"
+>
+  <span class="live-dot text-[8px] leading-none" aria-hidden="true">●</span>
+  <slot />
+</span>
