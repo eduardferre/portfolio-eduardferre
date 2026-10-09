@@ -9,7 +9,9 @@ export const PROFILES = {
 } as const
 
 // Stable @id nodes, identical in every language (Google consolidates by @id).
-export const PERSON_ID = `${SITE}/#person`
+// The person's entity home is the hub, which already declares this same @id;
+// the portfolio enriches that node instead of minting a second identity.
+export const PERSON_ID = `${HUB}/#person`
 export const WEBSITE_ID = `${SITE}/#website`
 
 export const abs = (path: string) => new URL(path, `${SITE}/`).href

@@ -49,7 +49,8 @@ const person = {
   '@id': PERSON_ID,
   name: 'Eduard Ferré',
   alternateName: 'Edu Ferré',
-  url: abs('/'),
+  url: `${HUB}/`,
+  mainEntityOfPage: abs('/'),
   image: ogImage,
   jobTitle: 'AI / Data Engineer',
   description:
@@ -102,7 +103,7 @@ const person = {
     'Software Engineering'
   ],
   knowsLanguage: ['es', 'ca', 'en'],
-  sameAs: [PROFILES.github, PROFILES.linkedin, `${HUB}/`]
+  sameAs: [PROFILES.github, PROFILES.linkedin]
 }
 
 const website = {
