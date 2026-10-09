@@ -18,9 +18,11 @@ interface Props {
 const { title, description, lang = 'en', noindex = false } = Astro.props
 
 const canonicalURL = abs(Astro.url.pathname)
-// Square portrait (560×560): published as a `summary` card, not a large one.
-const ogImage = abs('/landingImage.jpg')
-const ogImageAlt = 'Eduard Ferré, AI / Data Engineer'
+// Social card (1200×630) for link previews; the clean portrait stays the
+// structured-data image.
+const ogImage = abs('/og-image.jpg')
+const portrait = abs('/landingImage.jpg')
+const ogImageAlt = 'Eduard Ferré — AI / Data Engineer. LLMs, GraphRAG, Knowledge Graphs'
 
 // hreflang alternates (the portfolio is published in en at / and es at /es/)
 const alternates = [
@@ -49,7 +51,7 @@ const person = {
   alternateName: 'Edu Ferré',
   url: `${HUB}/`,
   mainEntityOfPage: abs('/'),
-  image: ogImage,
+  image: portrait,
   jobTitle: 'AI / Data Engineer',
   description:
     'AI / Data Engineer at Carver Advanced Systems, building LLM, GraphRAG and Knowledge Graph platforms and AI-driven Mainframe (COBOL/JCL) code analysis for the financial sector.',
@@ -181,14 +183,14 @@ const jsonLd = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="560" />
-    <meta property="og:image:height" content="560" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
