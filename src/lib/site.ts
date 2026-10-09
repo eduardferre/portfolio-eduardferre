@@ -6,7 +6,8 @@ export const HUB = 'https://eduardferre.dev'
 export const PROFILES = {
   github: 'https://github.com/eduardferre',
   linkedin: 'https://www.linkedin.com/in/eduardferre',
-  orcid: 'https://orcid.org/0009-0003-3993-8186'
+  orcid: 'https://orcid.org/0009-0003-3993-8186',
+  scholar: 'https://scholar.google.com/citations?user=QzWcWCQAAAAJ'
 } as const
 
 // Stable @id nodes, identical in every language (Google consolidates by @id).

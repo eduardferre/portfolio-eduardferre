@@ -30,6 +30,7 @@ export function links() {
     `- [GitHub](${PROFILES.github})`,
     `- [LinkedIn](${PROFILES.linkedin})`,
     `- [ORCID](${PROFILES.orcid})`,
+    `- [Google Scholar](${PROFILES.scholar})`,
     `- [Hub — eduardferre.dev](${HUB}/): all projects and sites`,
     '- Contact: eduardferresanchez@gmail.com',
     ''
