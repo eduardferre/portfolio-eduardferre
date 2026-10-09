@@ -1,7 +1,6 @@
 ---
 import LinkInLine from './LinkInLine.astro'
 import CountRoll from './CountRoll.astro'
-import CountRoll from './CountRoll.astro'
 import TechBadge from './TechBadge.astro'
 import type { Lang } from '@/i18n/ui'
 import { useTranslations } from '@/i18n/utils'
@@ -23,7 +22,7 @@ interface Props {
    */
   metrics?: { value: string; label: string; roll?: boolean }[]
   /** Peer-reviewed output of the role, listed as external links. */
-  publications?: { title: string; venue: string; year: string; href: string }[]
+  publications?: readonly { title: string; venue: string; year: string; href: string }[]
   lang?: Lang
 }
 

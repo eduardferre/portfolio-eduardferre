@@ -12,7 +12,7 @@ export const ui = {
         // Meta
         'meta.title': 'Eduard Ferré — AI / Data Engineer & Software Engineer',
         'meta.description':
-            'Portfolio of Eduard Ferré, AI / Data Engineer at Carver Advanced Systems. Building solutions with LLMs, RAG, Knowledge Graphs and Mainframe code analysis (COBOL/JCL). Experienced in Python, data engineering and full-stack software development.',
+            'Eduard Ferré, AI / Data Engineer in Barcelona. LLMs, GraphRAG, Knowledge Graphs and AI-driven Mainframe (COBOL/JCL) code analysis at Carver Advanced Systems.',
 
         // Nav
         'nav.experience': 'Experience',
@@ -35,10 +35,10 @@ export const ui = {
         // Experience
         'experience.0.title': 'AI / Data Engineer',
         'experience.0.description':
-            '<p>Built a <strong>multi-agent AI system</strong> (Python, OpenAI, Azure) that traces <strong>data lineage across ~80,000 COBOL/JCL Mainframe files</strong> — around 24.5M lines of code — for a large European financial-automotive group. <strong>Sole owner for the first 8 months</strong>, from architecture to delivery and executive-level client contact; now co-leading a team, with regulatory deliverables compliant with <strong>ECB</strong> requirements.</p><p>Architected a <strong>Knowledge Graph + RAG</strong> codebase-intelligence platform for a banking and insurance group, rolling out across its full repository estate, and designed a <strong>LiteLLM-based AI governance proxy</strong> shaped as a product for external sale.</p><p>Other work across the portfolio: an AI call-center platform, a sales-training pipeline, an accounting application for a Spanish public administration body, and client PoCs.</p>',
+            '<p>Built a <strong>multi-agent AI system</strong> (Python, OpenAI, Azure) that traces <strong>data lineage across ~80,000 COBOL/JCL Mainframe files</strong> — around 24.5M lines of code — for a large European financial-automotive group. <strong>Sole owner for the first 8 months</strong>, from architecture to delivery and executive-level client contact; now co-leading a team, with regulatory deliverables compliant with <strong>ECB</strong> requirements.</p><p>Architected a <strong>Knowledge Graph + RAG</strong> codebase-intelligence platform for a banking and insurance group, <strong>adopted by most of its technical and business teams</strong>: a multi-repository graph (COBOL/JCL, Java, JS/TS, Python) built via <strong>AST parsing (ANTLR4)</strong>, enriched with LLM descriptions and business context, indexed in <strong>Neo4j</strong> and queried with <strong>GraphRAG</strong> (BM25 + embeddings, neighbour expansion, LLM traversal through tool calling). Also built a guardrailed <strong>RAG chatbot</strong> for an international insurer\'s website that routes users to the right section (in UAT, production launch planned).</p><p>Designed a <strong>LiteLLM-based AI governance proxy</strong> shaped as a product for external sale.</p><p>Other work: a sales-training pipeline, an accounting application for a Spanish public administration body, and client PoCs.</p>',
         'experience.1.title': 'Software Engineer',
         'experience.1.description':
-            '<p>Contributed to an enterprise <strong>eSIM/eUICC profile management platform</strong> (SGP.22, SGP.32) used by multiple telecom operators, implementing critical features such as terms-of-use and privacy acceptance and a <strong>proxy layer for beacon-type integrations</strong> — among them Spain\'s DGT V16 emergency beacon. Extracted and audited user data to support the legal department.</p><p>Backend in <strong>Java (Spring Boot)</strong> and <strong>TypeScript (Node.js/Express)</strong>, frontend in <strong>Angular</strong>, over Oracle SQL and MongoDB — working <strong>Scrum/Agile</strong> with Jenkins for CI/CD and SonarQube as the quality gate.</p>',
+            '<p>Developed key modules for a <strong>multi-tenant remote eSIM/eUICC profile management platform</strong> (SGP.22, SGP.32) used by multiple telecom operators — implemented terms-of-use/privacy acceptance flows and an <strong>orchestration proxy for dynamic eSIM profile recycling and pooling</strong> across devices, enabling <strong>massive-IoT</strong> use cases such as Spain\'s DGT V16 emergency beacon. Extracted and audited user data to support the legal department.</p><p>Backend in <strong>Java (Spring Boot)</strong> and <strong>TypeScript (Node.js/Express)</strong>, frontend in <strong>Angular</strong>, over Oracle SQL and MongoDB — working <strong>Scrum/Agile</strong> with Jenkins for CI/CD and SonarQube as the quality gate.</p>',
         'experience.2.title': 'Researcher',
         'experience.2.description':
             '<p>Research and characterization of different <strong>IPV (indoor photovoltaic)</strong> cell technologies under varying indoor light conditions, as part of the <strong>EU-funded project CELISA</strong> — efficient harvesting of indoor light energy for autonomous sensors.</p><p>Owned the full experimental cycle: circuit design and instrumentation (KiCad, BenchVue, AvaSoft), measurement campaigns under controlled illuminance and temperature, and data analysis in Matlab — work that ended up in <strong>four peer-reviewed publications</strong>.</p>',
@@ -46,14 +46,14 @@ export const ui = {
         // Projects
         'project.0.title': 'eGym - Fitness application with Machine Learning',
         'project.0.description':
-            "eGym is an iOS application developed for my final Network Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.",
+            "eGym is an iOS application developed for my final Telematics Engineering bachelor's thesis. The application is a combination of a social network, a fitness tracking app and a personal trainer powered with machine learning. All the data is stored in two databases (access control and data storage) via an API Rest. The machine learning is based on a personalized model, which has been trained with multiple videos of different exercises.",
         'project.1.title': 'ZenithFi - Personal Finance App',
         'project.1.description':
             'ZenithFi is a modern, elegant personal finance and budgeting web application built for clarity and ease of use. Track income and expenses, manage spending categories with unique colors and emojis, and set budget limits. Features a customizable dashboard, deep analytics with charts, internationalization (English, Spanish, Catalan), dark mode, and secure session-based authentication.',
 
         // About Me
         'about.p1':
-            "I'm Eduard, although everyone knows me as Edu! At 15 years old, I learned programming logic and was able to create a Brick Breaker with Visual Basic. Years later, I pursued a <strong>double degree in Aerospace Systems Engineering and Network Engineering</strong> at <strong>Universitat Politècnica de Catalunya (UPC)</strong>.",
+            "I'm Eduard, although everyone knows me as Edu! At 15 years old, I learned programming logic and was able to create a Brick Breaker with Visual Basic. Years later, I pursued a <strong>double degree in Aerospace Systems Engineering and Telematics Engineering</strong> at <strong>Universitat Politècnica de Catalunya (UPC)</strong>.",
         'about.p2':
             "Along the way I built projects with just about every technology I could get my hands on, but it was in my final year — while researching <strong>indoor photovoltaics at UPC</strong>, work that ended up in <strong>four peer-reviewed publications</strong> — that I decided software was where I wanted to be, and joined <strong>G+D</strong>.",
         'about.p3':
@@ -72,7 +72,7 @@ export const ui = {
         'about.fact.now': 'now',
         'about.fact.nowValue': 'Carver Advanced Systems',
         'about.fact.focus': 'focus',
-        'about.fact.focusValue': 'LLMs · RAG · Data',
+        'about.fact.focusValue': 'LLMs · GraphRAG · Knowledge Graphs',
 
         // Case studies
         'nav.cases': 'Cases',
@@ -151,7 +151,7 @@ export const ui = {
         // Meta
         'meta.title': 'Eduard Ferré — Ingeniero de IA / Datos y Software',
         'meta.description':
-            'Portfolio de Eduard Ferré, Ingeniero de IA / Datos en Carver Advanced Systems. Soluciones con LLMs, RAG, Grafos de Conocimiento y análisis de código Mainframe (COBOL/JCL). Experiencia en Python, ingeniería de datos y desarrollo full-stack.',
+            'Eduard Ferré, Ingeniero de IA / Datos en Barcelona. LLMs, GraphRAG, Knowledge Graphs y análisis de código Mainframe (COBOL/JCL) con IA en Carver Advanced Systems.',
 
         // Nav
         'nav.experience': 'Experiencia',
@@ -174,10 +174,10 @@ export const ui = {
         // Experience
         'experience.0.title': 'Ingeniero de IA / Datos',
         'experience.0.description':
-            '<p>Construí un <strong>sistema de IA multi-agente</strong> (Python, OpenAI, Azure) que traza el <strong>linaje de datos sobre ~80.000 ficheros COBOL/JCL de Mainframe</strong> — unos 24,5M de líneas de código — para un gran grupo financiero del sector automoción a nivel europeo. <strong>Responsable único durante los primeros 8 meses</strong>, de la arquitectura a la entrega y el contacto directo a nivel directivo; ahora co-lidero un equipo, con entregables regulatorios conformes a los requisitos del <strong>BCE</strong>.</p><p>Diseñé la arquitectura de una plataforma de <strong>Knowledge Graph + RAG</strong> para inteligencia de código en una entidad de banca-seguros, en despliegue sobre todo su repositorio, y un <strong>proxy de gobernanza de IA basado en LiteLLM</strong> planteado como producto para venta externa.</p><p>Otros trabajos de la cartera: una plataforma de IA para call center, un pipeline de formación comercial, una aplicación de contabilidad para una administración pública española y PoCs para cliente.</p>',
+            '<p>Construí un <strong>sistema de IA multi-agente</strong> (Python, OpenAI, Azure) que traza el <strong>linaje de datos sobre ~80.000 ficheros COBOL/JCL de Mainframe</strong> — unos 24,5M de líneas de código — para un gran grupo financiero del sector automoción a nivel europeo. <strong>Responsable único durante los primeros 8 meses</strong>, de la arquitectura a la entrega y el contacto directo a nivel directivo; ahora co-lidero un equipo, con entregables regulatorios conformes a los requisitos del <strong>BCE</strong>.</p><p>Diseñé la arquitectura de una plataforma de <strong>Knowledge Graph + RAG</strong> para inteligencia de código en un grupo de banca y seguros, <strong>adoptada por la mayoría de sus equipos técnicos y de negocio</strong>: grafo multi-repositorio (COBOL/JCL, Java, JS/TS, Python) construido mediante <strong>parseo AST (ANTLR4)</strong>, enriquecido con descripciones del LLM y contexto de negocio, indexado en <strong>Neo4j</strong> y consultado con <strong>GraphRAG</strong> (BM25 + embeddings, expansión de vecinos y recorrido del grafo por el LLM con tool calling). También desarrollé un <strong>chatbot RAG</strong> con guardarraíles para el sitio web de una aseguradora internacional que dirige a los usuarios a la sección correcta (en UAT, con lanzamiento a producción previsto).</p><p>Diseñé un <strong>proxy de gobernanza de IA basado en LiteLLM</strong> planteado como producto para venta externa.</p><p>Otros trabajos: un pipeline de formación comercial, una aplicación de contabilidad para un organismo de la administración pública española y PoCs para clientes.</p>',
         'experience.1.title': 'Ingeniero de Software',
         'experience.1.description':
-            '<p>Contribuí a una plataforma enterprise de <strong>gestión de perfiles eSIM/eUICC</strong> (SGP.22, SGP.32) usada por múltiples operadores de telecomunicaciones, implementando funcionalidades críticas como la aceptación de términos de uso y privacidad y una <strong>capa proxy para integraciones tipo baliza</strong> — entre ellas la baliza V16 de la DGT. Extraje y audité datos de usuarios para dar soporte al departamento legal.</p><p>Backend en <strong>Java (Spring Boot)</strong> y <strong>TypeScript (Node.js/Express)</strong>, frontend en <strong>Angular</strong>, sobre Oracle SQL y MongoDB — en equipo <strong>Scrum/Agile</strong>, con Jenkins para CI/CD y SonarQube como puerta de calidad.</p>',
+            '<p>Desarrollé módulos clave para una <strong>plataforma multi-tenant de gestión remota de perfiles eSIM/eUICC</strong> (SGP.22, SGP.32) usada por múltiples operadores de telecomunicaciones: flujos de aceptación de Términos de Uso/Privacidad y un <strong>proxy de orquestación para el reciclaje y pooling dinámico de perfiles eSIM</strong> entre dispositivos, habilitando casos de uso de <strong>IoT masivo</strong> como la baliza de emergencia V16 de la DGT. Extraje y audité datos de usuarios para apoyar al departamento legal.</p><p>Backend en <strong>Java (Spring Boot)</strong> y <strong>TypeScript (Node.js/Express)</strong>, frontend en <strong>Angular</strong>, sobre Oracle SQL y MongoDB — en equipo <strong>Scrum/Agile</strong>, con Jenkins para CI/CD y SonarQube como puerta de calidad.</p>',
         'experience.2.title': 'Investigador',
         'experience.2.description':
             '<p>Investigación y caracterización de distintas tecnologías de <strong>células fotovoltaicas indoor (IPV)</strong> bajo diferentes condiciones de luz interior, en el marco del <strong>proyecto europeo CELISA</strong> — harvesting eficiente de energía lumínica indoor para sensores autónomos.</p><p>Me encargué del ciclo experimental completo: diseño de circuitos e instrumentación (KiCad, BenchVue, AvaSoft), campañas de medida bajo iluminancia y temperatura controladas, y análisis de datos en Matlab — un trabajo que acabó en <strong>cuatro publicaciones revisadas por pares</strong>.</p>',
@@ -185,14 +185,14 @@ export const ui = {
         // Projects
         'project.0.title': 'eGym - Aplicación de fitness con Machine Learning',
         'project.0.description':
-            'eGym es una aplicación iOS desarrollada para mi trabajo de fin de grado en Ingeniería de Redes. La aplicación combina una red social, una app de seguimiento fitness y un entrenador personal potenciado con machine learning. Todos los datos se almacenan en dos bases de datos (control de acceso y almacenamiento) mediante una API Rest. El machine learning se basa en un modelo personalizado, entrenado con múltiples vídeos de diferentes ejercicios.',
+            'eGym es una aplicación iOS desarrollada para mi TFG de Ingeniería Telemática. La aplicación combina una red social, una app de seguimiento fitness y un entrenador personal potenciado con machine learning. Todos los datos se almacenan en dos bases de datos (control de acceso y almacenamiento) mediante una API Rest. El machine learning se basa en un modelo personalizado, entrenado con múltiples vídeos de diferentes ejercicios.',
         'project.1.title': 'ZenithFi - Aplicación de Finanzas Personales',
         'project.1.description':
             'ZenithFi es una aplicación web moderna y elegante de finanzas personales diseñada para ofrecer claridad y facilidad de uso. Permite registrar ingresos y gastos, gestionar categorías personalizadas con colores y emojis, y establecer límites de presupuesto. Cuenta con un panel personalizable, analíticas avanzadas con gráficos interactivos, modo oscuro, internacionalización (Inglés, Español, Catalán) y autenticación segura basada en sesiones.',
 
         // About Me
         'about.p1':
-            '¡Soy Eduard, aunque todos me conocen como Edu! A los 15 años aprendí lógica de programación y creé un Brick Breaker con Visual Basic. Años después, cursé un <strong>doble grado en Ingeniería de Sistemas Aeroespaciales e Ingeniería de Redes</strong> en la <strong>Universitat Politècnica de Catalunya (UPC)</strong>.',
+            '¡Soy Eduard, aunque todos me conocen como Edu! A los 15 años aprendí lógica de programación y creé un Brick Breaker con Visual Basic. Años después, cursé un <strong>doble grado en Ingeniería de Sistemas Aeroespaciales e Ingeniería Telemática</strong> en la <strong>Universitat Politècnica de Catalunya (UPC)</strong>.',
         'about.p2':
             'Por el camino construí proyectos con casi cualquier tecnología que cayera en mis manos, pero fue en el último año — investigando <strong>fotovoltaica de interior en la UPC</strong>, un trabajo que acabó en <strong>cuatro publicaciones revisadas por pares</strong> — cuando decidí que lo mío era el software, y entré en <strong>G+D</strong>.',
         'about.p3':
@@ -211,7 +211,7 @@ export const ui = {
         'about.fact.now': 'ahora',
         'about.fact.nowValue': 'Carver Advanced Systems',
         'about.fact.focus': 'foco',
-        'about.fact.focusValue': 'LLMs · RAG · Datos',
+        'about.fact.focusValue': 'LLMs · GraphRAG · Knowledge Graphs',
 
         // Case studies
         'nav.cases': 'Casos',
@@ -280,7 +280,7 @@ export const ui = {
         'metric.projects': 'Proyectos entregados',
 
         // Dates
-        'date.present': 'Presente',
+        'date.present': 'Actualidad',
         'date.august': 'Agosto',
         'date.february': 'Febrero',
         'date.july': 'Julio',

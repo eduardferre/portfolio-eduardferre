@@ -7,60 +7,139 @@ import { ClientRouter } from 'astro:transitions'
 import SpeedInsights from '@vercel/speed-insights/astro'
 import Analytics from '@vercel/analytics/astro'
 import type { Lang } from '@/i18n/ui'
+import { PUBLICATIONS } from '@/data/publications'
+import { HUB, PERSON_ID, PROFILES, WEBSITE_ID, abs } from '@/lib/site'
 
 interface Props {
   title: string
   description: string
   lang?: Lang
+  noindex?: boolean
 }
 
-const { title, description, lang = 'en' } = Astro.props
+const { title, description, lang = 'en', noindex = false } = Astro.props
 
-const SITE = 'https://eduardferre.dev'
-const canonicalURL = new URL(Astro.url.pathname, SITE).href
-const ogImage = new URL('/landingImage.jpg', SITE).href
+const canonicalURL = abs(Astro.url.pathname)
+// Square portrait (560×560): published as a `summary` card, not a large one.
+const ogImage = abs('/landingImage.jpg')
+const ogImageAlt = 'Eduard Ferré, AI / Data Engineer'
 
 // hreflang alternates (the portfolio is published in en at / and es at /es/)
 const alternates = [
-  { hreflang: 'en', href: `${SITE}/` },
-  { hreflang: 'es', href: `${SITE}/es/` },
-  { hreflang: 'x-default', href: `${SITE}/` }
+  { hreflang: 'en', href: abs('/') },
+  { hreflang: 'es', href: abs('/es/') },
+  { hreflang: 'x-default', href: abs('/') }
 ]
 
-const jsonLd = {
-  '@context': 'https://schema.org',
+const upc = {
+  '@type': 'CollegeOrUniversity',
+  name: 'Universitat Politècnica de Catalunya (UPC)',
+  url: 'https://www.upc.edu'
+}
+const uc3m = {
+  '@type': 'CollegeOrUniversity',
+  name: 'Universidad Carlos III de Madrid (UC3M)',
+  url: 'https://www.uc3m.es'
+}
+
+// Shared nodes (#person, #website) are byte-identical in both languages and
+// written in the default language; only the ProfilePage node varies per page.
+const person = {
   '@type': 'Person',
+  '@id': PERSON_ID,
   name: 'Eduard Ferré',
   alternateName: 'Edu Ferré',
-  url: `${SITE}/`,
+  url: abs('/'),
   image: ogImage,
   jobTitle: 'AI / Data Engineer',
+  description:
+    'AI / Data Engineer at Carver Advanced Systems, building LLM, GraphRAG and Knowledge Graph platforms and AI-driven Mainframe (COBOL/JCL) code analysis for the financial sector.',
   worksFor: {
     '@type': 'Organization',
     name: 'Carver Advanced Systems',
     url: 'https://carver-as.com'
   },
-  address: {
-    '@type': 'PostalPlace',
-    addressLocality: 'Barcelona',
-    addressCountry: 'ES'
+  homeLocation: {
+    '@type': 'Place',
+    address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressCountry: 'ES' }
   },
-  alumniOf: [
-    { '@type': 'CollegeOrUniversity', name: 'Universitat Politècnica de Catalunya (UPC)' },
-    { '@type': 'CollegeOrUniversity', name: 'Universidad Carlos III de Madrid (UC3M)' }
+  alumniOf: [upc, uc3m],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: "Bachelor's degree in Aerospace Systems Engineering",
+      recognizedBy: upc
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: "Bachelor's degree in Telematics Engineering",
+      recognizedBy: upc
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: "Master's degree in Big Data Analytics",
+      recognizedBy: uc3m
+    }
   ],
   knowsAbout: [
     'Artificial Intelligence',
     'Large Language Models',
     'Retrieval-Augmented Generation',
+    'GraphRAG',
     'Knowledge Graphs',
+    'Neo4j',
+    'Multi-agent systems',
+    'Data lineage',
+    'COBOL',
+    'JCL',
+    'Mainframe modernization',
     'Data Engineering',
+    'Python',
+    'eSIM',
     'Software Engineering'
   ],
-  sameAs: [
-    'https://github.com/eduardferre',
-    'https://linkedin.com/in/eduardferre'
-  ]
+  knowsLanguage: ['es', 'ca', 'en'],
+  sameAs: [PROFILES.github, PROFILES.linkedin, `${HUB}/`]
+}
+
+const website = {
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: abs('/'),
+  name: 'Eduard Ferré — Portfolio',
+  inLanguage: ['en', 'es'],
+  publisher: { '@id': PERSON_ID }
+}
+
+const profilePage = {
+  '@type': 'ProfilePage',
+  '@id': `${canonicalURL}#profilepage`,
+  url: canonicalURL,
+  name: title,
+  description,
+  inLanguage: lang,
+  isPartOf: { '@id': WEBSITE_ID },
+  mainEntity: { '@id': PERSON_ID },
+  dateModified: new Date().toISOString().slice(0, 10)
+}
+
+// Peer-reviewed work, authored by #person — the strongest expertise signal here.
+const articles = PUBLICATIONS.map((p) => ({
+  '@type': 'ScholarlyArticle',
+  '@id': p.href,
+  headline: p.title,
+  url: p.href,
+  datePublished: p.year,
+  isPartOf: { '@type': 'Periodical', name: p.venue },
+  author: { '@id': PERSON_ID }
+}))
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [person, website, profilePage, ...articles]
 }
 ---
 
@@ -75,28 +154,44 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Eduard Ferré" />
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
     <meta name="theme-color" content="#07070A" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#F7F6F2" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+
+    <!-- Identity: same person as these profiles (IndieAuth / rel=me) -->
+    <link rel="me" href={PROFILES.github} />
+    <link rel="me" href={PROFILES.linkedin} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
+    <meta property="profile:first_name" content="Eduard" />
+    <meta property="profile:last_name" content="Ferré" />
     <meta property="og:site_name" content="Eduard Ferré" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="560" />
+    <meta property="og:image:height" content="560" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="/landingImage.jpg" fetchpriority="high" />

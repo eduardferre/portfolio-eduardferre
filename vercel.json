@@ -12,12 +12,70 @@
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"service-doc\"; type=\"text/plain\", </llms-full.txt>; rel=\"describedby\"; type=\"text/plain\", </sitemap-index.xml>; rel=\"sitemap\""
+        }
+      ]
+    },
+    {
+      "source": "/es",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"service-doc\"; type=\"text/plain\", </llms-full.txt>; rel=\"describedby\"; type=\"text/plain\", </sitemap-index.xml>; rel=\"sitemap\""
+        }
+      ]
+    },
+    {
+      "source": "/es/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"service-doc\"; type=\"text/plain\", </llms-full.txt>; rel=\"describedby\"; type=\"text/plain\", </sitemap-index.xml>; rel=\"sitemap\""
+        }
+      ]
+    },
+    {
+      "source": "/(llms|llms-full).txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/components",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         }
       ]
     }

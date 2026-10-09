@@ -22,7 +22,8 @@ function walk(dir) {
 }
 
 const csp = readFileSync('vercel.json', 'utf8')
-const inlineScript = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi
+// JSON-LD (type=application/ld+json) is data, never executed, so CSP ignores it.
+const inlineScript = /<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/gi
 
 const missing = new Map()
 for (const file of walk(DIST)) {

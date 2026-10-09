@@ -1,5 +1,7 @@
 ---
 import ExperienceItem from './ExperienceItem.astro'
+import { PUBLICATIONS } from '@/data/publications'
+import { ROLES, type Role } from '@/data/roles'
 import type { Lang } from '@/i18n/ui'
 import { useTranslations } from '@/i18n/utils'
 
@@ -18,16 +20,19 @@ const yearsAtCarver = Math.max(
 )
 
 
+const role = ({ key, company, link, start, end }: Role) => ({
+  startDate: `${t(start[0])} ${start[1]}`,
+  endDate: end ? `${t(end[0])} ${end[1]}` : t('date.present'),
+  title: t(`experience.${key}.title`),
+  description: t(`experience.${key}.description`),
+  company,
+  link,
+  current: end === null
+})
+
 const EXPERIENCE = [
   {
-    startDate: `${t('date.august')} 2025`,
-    // Ongoing role: never render a concrete end date, which reads as "left".
-    endDate: t('date.present'),
-    title: t('experience.0.title'),
-    company: 'Carver Advanced Systems',
-    description: t('experience.0.description'),
-    link: 'https://carver-as.com',
-    current: true,
+    ...role(ROLES[0]),
     // Scale figures of the work — no end-client names (NDA).
     metrics: [
       { value: `${yearsAtCarver}+`, label: t('metric.years') },
@@ -41,7 +46,10 @@ const EXPERIENCE = [
       'Multi-Agent',
       'RAG',
       'Knowledge Graphs',
+      'GraphRAG',
       'Neo4j',
+      'ANTLR',
+      'Tool calling',
       'OpenAI API',
       'Azure',
       'LiteLLM',
@@ -50,12 +58,7 @@ const EXPERIENCE = [
     ]
   },
   {
-    startDate: `${t('date.august')} 2023`,
-    endDate: `${t('date.august')} 2025`,
-    title: t('experience.1.title'),
-    company: 'Giesecke+Devrient',
-    description: t('experience.1.description'),
-    link: 'https://www.gi-de.com/',
+    ...role(ROLES[1]),
     technologies: [
       'Java',
       'Spring Boot',
@@ -76,43 +79,9 @@ const EXPERIENCE = [
     ]
   },
   {
-    startDate: `${t('date.february')} 2023`,
-    endDate: `${t('date.july')} 2023`,
-    title: t('experience.2.title'),
-    company: 'Universitat Politécnica de Catalunya',
-    description: t('experience.2.description'),
+    ...role(ROLES[2]),
     technologies: ['Matlab', 'KiCad', 'BenchVue', 'AvaSoft'],
-    // Co-authored output of the CELISA project. Titles stay in English (the
-    // language they were published in) in both locales.
-    publications: [
-      {
-        title:
-          'Low-Area PV Cells Under Indoor Artificial Lighting: A Comparative Study',
-        venue: 'IEEE Transactions on Instrumentation and Measurement',
-        year: '2025',
-        href: 'https://ieeexplore.ieee.org/document/10909273'
-      },
-      {
-        title:
-          'Comparative analysis of low-power PV cells of different technologies under different types of indoor artificial lighting',
-        venue: 'IEEE I2MTC',
-        year: '2024',
-        href: 'https://ieeexplore.ieee.org/document/10561134'
-      },
-      {
-        title:
-          'Systematic Experimental Evaluation of Submilliwatt PV Cells for Indoor Applications',
-        venue: 'Eurosensors / MDPI Proceedings',
-        year: '2023',
-        href: 'https://www.mdpi.com/2504-3900/97/1/149'
-      },
-      {
-        title: 'FOCV-MPPT Power Management Unit for Submilliwatt Indoor PV Cells',
-        venue: 'Eurosensors / MDPI Proceedings',
-        year: '2023',
-        href: 'https://www.mdpi.com/2504-3900/97/1/99'
-      }
-    ]
+    publications: PUBLICATIONS
   }
 ]
 ---
