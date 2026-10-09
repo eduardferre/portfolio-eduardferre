@@ -29,6 +29,7 @@ export function links() {
     '',
     `- [GitHub](${PROFILES.github})`,
     `- [LinkedIn](${PROFILES.linkedin})`,
+    `- [ORCID](${PROFILES.orcid})`,
     `- [Hub — eduardferre.dev](${HUB}/): all projects and sites`,
     '- Contact: eduardferresanchez@gmail.com',
     ''
@@ -39,7 +40,7 @@ export function publications() {
   return [
     '## Peer-reviewed publications',
     '',
-    ...PUBLICATIONS.map((p) => `- [${p.title}](${p.href}) — ${p.venue}, ${p.year}`),
+    ...PUBLICATIONS.map((p) => `- [${p.title}](${p.href}) — ${p.venue}, ${p.year}. DOI: ${p.doi}`),
     ''
   ]
 }
