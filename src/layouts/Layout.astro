@@ -124,7 +124,8 @@ const profilePage = {
   inLanguage: lang,
   isPartOf: { '@id': WEBSITE_ID },
   mainEntity: { '@id': PERSON_ID },
-  dateModified: new Date().toISOString().slice(0, 10)
+  // Full ISO 8601 date-time with timezone (build time); Google rejects date-only values here.
+  dateModified: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')
 }
 
 // Peer-reviewed work, authored by #person — the strongest expertise signal here.
