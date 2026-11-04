@@ -10,9 +10,9 @@ export type Lang = keyof typeof languages
 export const ui = {
     en: {
         // Meta
-        'meta.title': 'Eduard Ferré — AI / Data Engineer & Software Engineer',
+        'meta.title': 'Eduard Ferré — AI Engineer & Software Engineer',
         'meta.description':
-            'Eduard Ferré, AI / Data Engineer in Barcelona. LLMs, GraphRAG, Knowledge Graphs and AI-driven Mainframe (COBOL/JCL) code analysis at Carver Advanced Systems.',
+            'Eduard Ferré, AI Engineer in Barcelona. LLMs, GraphRAG, Knowledge Graphs and AI-driven Mainframe (COBOL/JCL) code analysis at Carver Advanced Systems.',
 
         // Nav
         'nav.experience': 'Experience',
@@ -23,9 +23,9 @@ export const ui = {
         // Hero
         'hero.badge': 'Open to offers',
         'hero.greeting': "Hello, I'm",
-        'hero.role': 'AI & Data Engineer. Building tools that actually work.',
+        'hero.role': 'AI Engineer. Building tools that actually work.',
         'hero.bio':
-            "+3 years of professional experience. <strong>AI / Data Engineer</strong> at <strong>Carver Advanced Systems</strong>. Currently working on projects involving <strong>LLMs</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong>Mainframe code analysis (COBOL/JCL) using AI</strong>. Living in Barcelona, pursuing an online master's degree in <strong>Project Management</strong> at <strong>EAE Business School</strong>, specialising in Agile Methodologies and Digital Transformation. Passionate about building scalable data solutions and leveraging AI to drive strategic decisions.",
+            "+3 years of professional experience. <strong>AI Engineer</strong> at <strong>Carver Advanced Systems</strong>. Currently working on projects involving <strong>LLMs</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong>Mainframe code analysis (COBOL/JCL) using AI</strong>. Living in Barcelona, pursuing an online master's degree in <strong>Project Management</strong> at <strong>EAE Business School</strong>, specialising in Agile Methodologies and Digital Transformation. Passionate about building scalable data solutions and leveraging AI to drive strategic decisions.",
 
         // Section titles
         'section.experience': 'Job Experience',
@@ -33,7 +33,7 @@ export const ui = {
         'section.aboutMe': 'About Me',
 
         // Experience
-        'experience.0.title': 'AI / Data Engineer',
+        'experience.0.title': 'AI Engineer',
         'experience.0.description':
             '<p>Built a <strong>multi-agent AI system</strong> (Python, OpenAI, Azure) that traces <strong>data lineage across ~80,000 COBOL/JCL Mainframe files</strong> — around 24.5M lines of code — for a large European financial-automotive group. <strong>Sole owner for the first 8 months</strong>, from architecture to delivery and executive-level client contact; now co-leading a team, with regulatory deliverables compliant with <strong>ECB</strong> requirements.</p><p>Architected a <strong>Knowledge Graph + RAG</strong> codebase-intelligence platform for a banking and insurance group, <strong>adopted by most of its technical and business teams</strong>: a multi-repository graph (COBOL/JCL, Java, JS/TS, Python) built via <strong>AST parsing (ANTLR4)</strong>, enriched with LLM descriptions and business context, indexed in <strong>Neo4j</strong> and queried with <strong>GraphRAG</strong> (BM25 + embeddings, neighbour expansion, LLM traversal through tool calling). Also built a guardrailed <strong>RAG chatbot</strong> for an international insurer\'s website that routes users to the right section (in UAT, production launch planned).</p><p>Designed a <strong>LiteLLM-based AI governance proxy</strong> shaped as a product for external sale.</p><p>Other work: a sales-training pipeline, an accounting application for a Spanish public administration body, and client PoCs.</p>',
         'experience.1.title': 'Software Engineer',
@@ -61,7 +61,7 @@ export const ui = {
         'about.p4':
             "Later, I pursued a master's degree in <strong>Big Data Analytics</strong> at <strong>Universidad Carlos III de Madrid (UC3M)</strong>, where I deepened my knowledge in data science, machine learning, and large-scale data processing.",
         'about.p5':
-            'Today, I work as an <strong>AI / Data Engineer</strong> at <strong>Carver Advanced Systems</strong>, where I lead projects at the intersection of AI and data — building solutions with <strong>Large Language Models (LLMs)</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong><em class="italic">Mainframe code analysis (COBOL/JCL) using AI</em></strong>. On the side I\'m taking a master\'s in <strong>Project Management</strong> at <strong>EAE Business School</strong>, because knowing how to build something is only half of getting it delivered.',
+            'Today, I work as an <strong>AI Engineer</strong> at <strong>Carver Advanced Systems</strong>, where I lead projects at the intersection of AI and data — building solutions with <strong>Large Language Models (LLMs)</strong>, <strong>Knowledge Graphs with RAG</strong>, and <strong><em class="italic">Mainframe code analysis (COBOL/JCL) using AI</em></strong>. On the side I\'m taking a master\'s in <strong>Project Management</strong> at <strong>EAE Business School</strong>, because knowing how to build something is only half of getting it delivered.',
         'about.p6':
             'Outside of work you\'ll find me at the gym, cooking, or taking apart some side project that nobody asked for. I like problems that look messy at first and turn out to have a clean shape underneath.',
 
@@ -162,7 +162,7 @@ export const ui = {
         // Hero
         'hero.badge': 'Abierto a ofertas',
         'hero.greeting': 'Hola, soy',
-        'hero.role': 'AI & Data Engineer. Construyendo herramientas que funcionan.',
+        'hero.role': 'AI Engineer. Construyendo herramientas que funcionan.',
         'hero.bio':
             '+3 años de experiencia profesional. <strong>Ingeniero de IA / Datos</strong> en <strong>Carver Advanced Systems</strong>. Actualmente trabajo en proyectos con <strong>LLMs</strong>, <strong>Knowledge Graphs con RAG</strong> y <strong>análisis de código Mainframe (COBOL/JCL) con IA</strong>. Vivo en Barcelona, cursando un máster online en <strong>Gestión de Proyectos</strong> en <strong>EAE Business School</strong>, especializado en Metodologías Ágiles y Transformación Digital. Apasionado por construir soluciones de datos escalables y aprovechar la IA para impulsar decisiones estratégicas.',
 
